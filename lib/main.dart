@@ -62,6 +62,12 @@ class MyHomePage extends StatefulWidget {
 
 bool run = false;
 
+var circleSize = 0.0;
+
+var maxCircleSize = 0.0;
+
+var minCircleSize = 0.0;
+
 // variables
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -77,6 +83,18 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    // get the screen dimensions
+    if (width < height)
+      maxCircleSize = width * 0.8;
+    else if (height < width)
+      maxCircleSize = height * 0.8;
+    else
+      maxCircleSize = 230;
+    minCircleSize = maxCircleSize * 0.1;
+    circleSize = minCircleSize;
+    // set the circle to 10%-80% of the screen, according to (smaller) screen size
     return Scaffold(
       backgroundColor: pureBlack,
       body: GestureDetector(
@@ -91,23 +109,28 @@ class _MyHomePageState extends State<MyHomePage> {
         onDoubleTap: () {
           settings();
         },
-        child: Column(
-          // Column is also layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              Container(
+                width: circleSize,
+                height: circleSize,
+                decoration: new BoxDecoration(
+                  color: Colors.green[900],
+                  shape: BoxShape.circle,
+                ),
+              ),
+              Container(
+                width: circleSize - 8,
+                height: circleSize - 8,
+                decoration: new BoxDecoration(
+                  color: Colors.black,
+                  shape: BoxShape.circle,
+                ),
+              ),
+            ],
+          ),
         ),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
