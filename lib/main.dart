@@ -60,7 +60,15 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+bool run = false;
+
+// variables
+
 class _MyHomePageState extends State<MyHomePage> {
+  void breathe() {}
+
+  void settings() {}
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -71,9 +79,18 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       backgroundColor: pureBlack,
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: GestureDetector(
+        onLongPress: () {
+          if (run)
+            run = false;
+          else {
+            run = true;
+            breathe();
+          }
+        },
+        onDoubleTap: () {
+          settings();
+        },
         child: Column(
           // Column is also layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
