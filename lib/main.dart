@@ -62,6 +62,8 @@ class MyHomePage extends StatefulWidget {
 
 bool run = false;
 
+bool inhale = true;
+
 var circleSize = 0.0;
 
 var maxCircleSize = 0.0;
@@ -75,7 +77,22 @@ Future pause(Duration d) => new Future.delayed(d);
 // async
 
 class _MyHomePageState extends State<MyHomePage> {
-  void breathe() async{}
+  void breathe() async {
+    while (run) {
+      if (inhale) {
+        setState(() {
+          // This call to setState tells the Flutter framework that something has
+          // changed in this State, which causes it to rerun the build method below
+          // so that the display can reflect the updated values.
+          circleSize = circleSize;
+        });
+      } else {
+        setState(() {
+          circleSize = circleSize;
+        });
+      }
+    }
+  }
 
   void settings() {}
 
