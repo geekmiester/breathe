@@ -70,8 +70,12 @@ var minCircleSize = 0.0;
 
 // variables
 
+Future pause(Duration d) => new Future.delayed(d);
+
+// async
+
 class _MyHomePageState extends State<MyHomePage> {
-  void breathe() {}
+  void breathe() async{}
 
   void settings() {}
 
