@@ -143,8 +143,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
               Container(
-                width: circleSize - 8,
-                height: circleSize - 8,
+                width: circleSize - 10,
+                height: circleSize - 10,
                 decoration: new BoxDecoration(
                   color: Colors.black,
                   shape: BoxShape.circle,
