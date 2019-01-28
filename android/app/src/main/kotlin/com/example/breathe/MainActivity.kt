@@ -8,8 +8,6 @@ import io.flutter.plugins.GeneratedPluginRegistrant
 class MainActivity: FlutterActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     GeneratedPluginRegistrant.registerWith(this)
   }
   override fun onWindowFocusChanged(hasFocus: Boolean) {
