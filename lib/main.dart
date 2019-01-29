@@ -60,15 +60,53 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
+var inhalePause = 2;
+
+var exhalePause = 4;
+
+var inhaleTime = 7;
+
+var exhaleTime = 7;
+
+// variables for circle speed - all roughly in seconds
+
 bool run = false;
 
 bool inhale = true;
 
-var circleSize = 0.0;
+var inhaleSpeed = inhaleTime / 2.2;
+
+var exhaleSpeed = exhaleTime / 2.2;
+
+var breathCount = 0;
+
+var maxBreathCount = 15;
 
 var maxCircleSize = 0.0;
 
 var minCircleSize = 0.0;
+
+var circleSize = minCircleSize;
+
+var circle13 = maxCircleSize * 0.13;
+
+var circle20 = maxCircleSize * 0.2;
+
+var circle30 = maxCircleSize * 0.3;
+
+var circle80 = maxCircleSize * 0.8;
+
+var circle90 = maxCircleSize * 0.9;
+
+var circle97 = maxCircleSize * 0.97;
+
+var inhalePauseInMilliseconds = inhalePause * 1000;
+
+var exhalePauseInMilliseconds = exhalePause * 1000;
+
+var invertedInhaleSpeed = ((1 / inhaleSpeed) * 100).round();
+
+var invertedExhaleSpeed = ((1 / exhaleSpeed) * 100).round();
 
 // variables
 
@@ -84,12 +122,45 @@ class _MyHomePageState extends State<MyHomePage> {
           // This call to setState tells the Flutter framework that something has
           // changed in this State, which causes it to rerun the build method below
           // so that the display can reflect the updated values.
-          circleSize = circleSize;
+          if (circleSize < circle20)
+            circleSize = circleSize + 0.6;
+          else if (circleSize < circle30)
+            circleSize = circleSize + 0.9;
+          else if (circleSize > circle97)
+            circleSize = circleSize + 0.3;
+          else if (circleSize > circle90)
+            circleSize = circleSize + 0.5;
+          else if (circleSize > circle80)
+            circleSize = circleSize + 0.7;
+          else
+            circleSize++;
         });
+        if (circleSize >= maxCircleSize) {
+          inhale = false;
+          await pause(Duration(milliseconds: inhalePauseInMilliseconds));
+        }
+        await pause(Duration(milliseconds: invertedInhaleSpeed));
       } else {
         setState(() {
-          circleSize = circleSize;
+          if (circleSize < circle13)
+            circleSize = circleSize - 0.2;
+          else if (circleSize < circle20)
+            circleSize = circleSize - 0.4;
+          else if (circleSize < circle30)
+            circleSize = circleSize - 0.7;
+          else
+            circleSize--;
         });
+        if (circleSize <= minCircleSize) {
+          inhale = true;
+          breathCount++;
+          if (breathCount >= maxBreathCount) {
+            breathCount = 0;
+            run = false;
+          }
+          await pause(Duration(milliseconds: exhalePauseInMilliseconds));
+        }
+        await pause(Duration(milliseconds: invertedExhaleSpeed));
       }
     }
   }
@@ -114,7 +185,6 @@ class _MyHomePageState extends State<MyHomePage> {
     else
       maxCircleSize = 230;
     minCircleSize = maxCircleSize * 0.1;
-    circleSize = minCircleSize;
     // set the circle to 10%-80% of the screen, according to (smaller) screen size
     return Scaffold(
       backgroundColor: pureBlack,
