@@ -178,7 +178,7 @@ class _MyHomePageState extends State<MyHomePage> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     // get the screen dimensions
-    if (width < height)
+    if (width <= height)
       maxCircleSize = width * 0.8;
     else if (height < width)
       maxCircleSize = height * 0.8;
