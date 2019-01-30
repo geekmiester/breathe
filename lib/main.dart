@@ -60,9 +60,9 @@ var breathCount = 0;
 
 var maxBreathCount = 15;
 
-var minCircleSize = 0.0;
+var minCircleSize = 30.0;
 
-var maxCircleSize = 0.0;
+var maxCircleSize = 300.0;
 
 var circleSize = minCircleSize;
 
@@ -144,25 +144,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void settings() {}
-
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    // get the screen dimensions
-    if (width <= height)
-      maxCircleSize = width * 0.8;
-    else if (height < width)
-      maxCircleSize = height * 0.8;
-    else
-      maxCircleSize = 230;
-    minCircleSize = maxCircleSize * 0.1;
-    // set the circle to 10%-80% of the screen, according to (smaller) screen size
     return Scaffold(
       backgroundColor: pureBlack,
       body: GestureDetector(
-        onLongPress: () {
+        onTap: () {
           if (run)
             run = false;
           else {
@@ -170,9 +157,7 @@ class _MyHomePageState extends State<MyHomePage> {
             breathe();
           }
         },
-        onDoubleTap: () {
-          settings();
-        },
+        onDoubleTap: () {},
         child: Center(
           child: Stack(
             alignment: Alignment.center,
