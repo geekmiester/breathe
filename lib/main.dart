@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:breathe/settings.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +22,7 @@ const MaterialColor pureBlack = MaterialColor(
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(context) {
     return MaterialApp(
       title: '',
       debugShowCheckedModeBanner: false,
@@ -50,6 +51,8 @@ var inhaleTime = 7;
 
 var exhaleTime = 7;
 
+var buildFactor = 4;
+
 // variables for circle speed - all roughly in seconds
 
 bool run = false;
@@ -60,15 +63,15 @@ var breathCount = 0;
 
 var maxBreathCount = 15;
 
-var minCircleSize = 30.0;
+var minCircleSize = 0.1;
 
-var maxCircleSize = 300.0;
+var maxCircleSize = 0.9;
 
 var circleSize = minCircleSize;
 
-var inhaleSpeed = inhaleTime / 2.2;
+var inhaleSpeed = inhaleTime / buildFactor;
 
-var exhaleSpeed = exhaleTime / 2.2;
+var exhaleSpeed = exhaleTime / buildFactor;
 
 var circle13 = maxCircleSize * 0.13;
 
@@ -102,17 +105,17 @@ class _MyHomePageState extends State<MyHomePage> {
       if (inhale) {
         setState(() {
           if (circleSize < circle20)
-            circleSize = circleSize + 0.6;
+            circleSize = circleSize + 0.006;
           else if (circleSize < circle30)
-            circleSize = circleSize + 0.9;
+            circleSize = circleSize + 0.009;
           else if (circleSize > circle97)
-            circleSize = circleSize + 0.3;
+            circleSize = circleSize + 0.003;
           else if (circleSize > circle90)
-            circleSize = circleSize + 0.5;
+            circleSize = circleSize + 0.005;
           else if (circleSize > circle80)
-            circleSize = circleSize + 0.7;
+            circleSize = circleSize + 0.007;
           else
-            circleSize++;
+            circleSize = circleSize + 0.01;
         });
         if (circleSize >= maxCircleSize) {
           inhale = false;
@@ -122,13 +125,13 @@ class _MyHomePageState extends State<MyHomePage> {
       } else {
         setState(() {
           if (circleSize < circle13)
-            circleSize = circleSize - 0.2;
+            circleSize = circleSize - 0.002;
           else if (circleSize < circle20)
-            circleSize = circleSize - 0.4;
+            circleSize = circleSize - 0.004;
           else if (circleSize < circle30)
-            circleSize = circleSize - 0.7;
+            circleSize = circleSize - 0.007;
           else
-            circleSize--;
+            circleSize = circleSize - 0.01;
         });
         if (circleSize <= minCircleSize) {
           inhale = true;
@@ -148,37 +151,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: pureBlack,
-      body: GestureDetector(
-        onTap: () {
-          if (run)
-            run = false;
-          else {
-            run = true;
-            breathe();
-          }
-        },
-        onDoubleTap: () {},
-        child: Center(
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              Container(
-                width: circleSize,
-                height: circleSize,
-                decoration: new BoxDecoration(
-                  color: Colors.green[900],
-                  shape: BoxShape.circle,
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            if (run)
+              run = false;
+            else {
+              run = true;
+              breathe();
+            }
+          },
+          onDoubleTap: () {
+            settings(context);
+          },
+          child: FractionallySizedBox(
+            heightFactor: circleSize,
+            widthFactor: circleSize,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/circle.jpg'),
                 ),
               ),
-              Container(
-                width: circleSize - 10,
-                height: circleSize - 10,
-                decoration: new BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
