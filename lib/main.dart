@@ -1,7 +1,34 @@
-import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:breathe/settings.dart';
+import 'package:flutter/material.dart';
+import 'dart:async';
 
 void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    load();
+    return MaterialApp(
+      title: 'breathe',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: pureBlack,
+      ),
+      home: MyHomePage(title: 'breathe'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+
+  final String title;
+
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
 
 const MaterialColor pureBlack = MaterialColor(
   0xFF000000,
@@ -19,81 +46,45 @@ const MaterialColor pureBlack = MaterialColor(
   },
 );
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(context) {
-    return MaterialApp(
-      title: '',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: pureBlack,
-      ),
-      home: MyHomePage(title: ''),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-var inhalePause = 2;
-
-var exhalePause = 4;
-
-var inhaleTime = 7;
-
-var exhaleTime = 7;
-
-var buildFactor = 4;
-
-// variables for circle speed - all roughly in seconds
+var duration;
+var inhaleTime;
+var exhaleTime;
+var inhalePause;
+var exhalePause;
 
 bool run = false;
-
 bool inhale = true;
 
 var breathCount = 0;
 
-var maxBreathCount = 15;
-
 var minCircleSize = 0.1;
-
 var maxCircleSize = 0.9;
-
 var circleSize = minCircleSize;
 
-var inhaleSpeed = inhaleTime / buildFactor;
-
-var exhaleSpeed = exhaleTime / buildFactor;
-
 var circle13 = maxCircleSize * 0.13;
-
 var circle20 = maxCircleSize * 0.20;
-
 var circle30 = maxCircleSize * 0.30;
-
 var circle80 = maxCircleSize * 0.80;
-
 var circle90 = maxCircleSize * 0.90;
-
 var circle97 = maxCircleSize * 0.97;
 
-var inhalePauseInMilliseconds = inhalePause * 1000;
+Future<void> load() async {
+  SharedPreferences settings = await SharedPreferences.getInstance();
+  duration = (settings.getInt('duration') ?? "3");
+  inhaleTime = (settings.getInt('inhaleTime') ?? "7");
+  exhaleTime = (settings.getInt('exhaleTime') ?? "7");
+  inhalePause = (settings.getInt('inhalePause') ?? "2");
+  exhalePause = (settings.getInt('exhalePause') ?? "4");
+}
 
-var exhalePauseInMilliseconds = exhalePause * 1000;
-
-var invertedInhaleSpeed = ((1 / inhaleSpeed) * 100).round();
-
-var invertedExhaleSpeed = ((1 / exhaleSpeed) * 100).round();
-
-// variables
+Future<void> save() async {
+  SharedPreferences settings = await SharedPreferences.getInstance();
+  await settings.setInt('duration', duration);
+  await settings.setInt('inhaleTime', inhaleTime);
+  await settings.setInt('exhaleTime', exhaleTime);
+  await settings.setInt('inhalePause', inhalePause);
+  await settings.setInt('exhalePause', exhalePause);
+}
 
 Future pause(Duration d) => new Future.delayed(d);
 
@@ -119,9 +110,10 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         if (circleSize >= maxCircleSize) {
           inhale = false;
-          await pause(Duration(milliseconds: inhalePauseInMilliseconds));
+
+          await pause(Duration(milliseconds: (inhalePause * 1000)));
         }
-        await pause(Duration(milliseconds: invertedInhaleSpeed));
+        await pause(Duration(milliseconds: (inhaleTime * 10)));
       } else {
         setState(() {
           if (circleSize < circle13)
@@ -136,13 +128,15 @@ class _MyHomePageState extends State<MyHomePage> {
         if (circleSize <= minCircleSize) {
           inhale = true;
           breathCount++;
-          if (breathCount >= maxBreathCount) {
+          if (breathCount >=
+              (duration * 60) /
+                  (inhaleTime + inhalePause + exhaleTime + exhalePause)) {
             breathCount = 0;
             run = false;
           }
-          await pause(Duration(milliseconds: exhalePauseInMilliseconds));
+          await pause(Duration(milliseconds: exhalePause * 1000));
         }
-        await pause(Duration(milliseconds: invertedExhaleSpeed));
+        await pause(Duration(milliseconds: (exhaleTime * 10)));
       }
     }
   }
@@ -162,6 +156,9 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           },
           onDoubleTap: () {
+            run = false;
+            breathCount = 0;
+            circleSize = 0.1;
             settings(context);
           },
           child: FractionallySizedBox(
@@ -169,7 +166,9 @@ class _MyHomePageState extends State<MyHomePage> {
             widthFactor: circleSize,
             child: DecoratedBox(
               decoration: BoxDecoration(
+                shape: BoxShape.circle,
                 image: DecorationImage(
+                  fit: BoxFit.contain,
                   image: AssetImage('assets/circle.jpg'),
                 ),
               ),
