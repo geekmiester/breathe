@@ -70,11 +70,11 @@ var circle97 = maxCircleSize * 0.97;
 
 Future<void> load() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
-  duration = (settings.getInt('duration') ?? "3");
-  inhaleTime = (settings.getInt('inhaleTime') ?? "7");
-  exhaleTime = (settings.getInt('exhaleTime') ?? "7");
-  inhalePause = (settings.getInt('inhalePause') ?? "2");
-  exhalePause = (settings.getInt('exhalePause') ?? "4");
+  duration = (settings.getInt('duration') ?? 3);
+  inhaleTime = (settings.getInt('inhaleTime') ?? 7);
+  exhaleTime = (settings.getInt('exhaleTime') ?? 7);
+  inhalePause = (settings.getInt('inhalePause') ?? 2);
+  exhalePause = (settings.getInt('exhalePause') ?? 4);
 }
 
 Future<void> save() async {
@@ -110,7 +110,6 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         if (circleSize >= maxCircleSize) {
           inhale = false;
-
           await pause(Duration(milliseconds: (inhalePause * 1000)));
         }
         await pause(Duration(milliseconds: (inhaleTime * 10)));
