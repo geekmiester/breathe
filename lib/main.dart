@@ -46,6 +46,7 @@ const MaterialColor pureBlack = MaterialColor(
   },
 );
 
+var intro;
 var duration;
 var inhaleTime;
 var exhaleTime;
@@ -70,6 +71,7 @@ var circle97 = maxCircleSize * 0.97;
 
 Future<void> load() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
+  intro = (settings.getInt('intro') ?? 0);
   duration = (settings.getInt('duration') ?? 3);
   inhaleTime = (settings.getInt('inhaleTime') ?? 7);
   exhaleTime = (settings.getInt('exhaleTime') ?? 7);
@@ -79,6 +81,7 @@ Future<void> load() async {
 
 Future<void> save() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
+  await settings.setInt('intro', intro);
   await settings.setInt('duration', duration);
   await settings.setInt('inhaleTime', inhaleTime);
   await settings.setInt('exhaleTime', exhaleTime);

@@ -35,95 +35,97 @@ class MenuState extends StatefulWidget {
 class Menu extends State<MenuState> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Padding(padding: EdgeInsets.all(10.0)),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text(duration.toString() + " minutes",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25, color: Colors.white)),
-        ),
-        Slider(
-            activeColor: Colors.white,
-            value: duration.toDouble(),
-            min: 1,
-            max: 10,
-            onChanged: (double newValue) {
-              setState(() {
-                duration = newValue.toInt();
-                save();
-              });
-            }),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text(inhaleTime.toString() + "s " + "inhale",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25, color: Colors.white)),
-        ),
-        Slider(
-            activeColor: Colors.white,
-            value: inhaleTime.toDouble(),
-            min: 1,
-            max: 30,
-            onChanged: (double newValue) {
-              setState(() {
-                inhaleTime = newValue.toInt();
-                save();
-              });
-            }),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text(exhaleTime.toString() + "s " + "exhale",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25, color: Colors.white)),
-        ),
-        Slider(
-            activeColor: Colors.white,
-            value: exhaleTime.toDouble(),
-            min: 1,
-            max: 30,
-            onChanged: (double newValue) {
-              setState(() {
-                exhaleTime = newValue.toInt();
-                save();
-              });
-            }),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text(inhalePause.toString() + "s " + "pause after inhale",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25, color: Colors.white)),
-        ),
-        Slider(
-            activeColor: Colors.white,
-            value: inhalePause.toDouble(),
-            min: 0,
-            max: 20,
-            onChanged: (double newValue) {
-              setState(() {
-                inhalePause = newValue.toInt();
-                save();
-              });
-            }),
-        Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text(exhalePause.toString() + "s " + "pause after exhale",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 25, color: Colors.white)),
-        ),
-        Slider(
-            activeColor: Colors.white,
-            value: exhalePause.toDouble(),
-            min: 0,
-            max: 20,
-            onChanged: (double newValue) {
-              setState(() {
-                exhalePause = newValue.toInt();
-                save();
-              });
-            }),
-      ],
+    return Padding(
+      padding: EdgeInsets.all(20),
+      child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(duration.toString() + " minutes",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, color: Colors.white)),
+          ),
+          Slider(
+              activeColor: Colors.white,
+              value: duration.toDouble(),
+              min: 1,
+              max: 10,
+              onChanged: (double newValue) {
+                setState(() {
+                  duration = newValue.toInt();
+                  save();
+                });
+              }),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(inhaleTime.toString() + "s " + "inhale",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, color: Colors.white)),
+          ),
+          Slider(
+              activeColor: Colors.white,
+              value: inhaleTime.toDouble(),
+              min: 1,
+              max: 30,
+              onChanged: (double newValue) {
+                setState(() {
+                  inhaleTime = newValue.toInt();
+                  save();
+                });
+              }),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(exhaleTime.toString() + "s " + "exhale",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, color: Colors.white)),
+          ),
+          Slider(
+              activeColor: Colors.white,
+              value: exhaleTime.toDouble(),
+              min: 1,
+              max: 30,
+              onChanged: (double newValue) {
+                setState(() {
+                  exhaleTime = newValue.toInt();
+                  save();
+                });
+              }),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(inhalePause.toString() + "s " + "pause after inhale",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, color: Colors.white)),
+          ),
+          Slider(
+              activeColor: Colors.white,
+              value: inhalePause.toDouble(),
+              min: 0,
+              max: 20,
+              onChanged: (double newValue) {
+                setState(() {
+                  inhalePause = newValue.toInt();
+                  save();
+                });
+              }),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(exhalePause.toString() + "s " + "pause after exhale",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, color: Colors.white)),
+          ),
+          Slider(
+              activeColor: Colors.white,
+              value: exhalePause.toDouble(),
+              min: 0,
+              max: 20,
+              onChanged: (double newValue) {
+                setState(() {
+                  exhalePause = newValue.toInt();
+                  save();
+                });
+              }),
+        ],
+      ),
     );
   }
 }
