@@ -35,6 +35,9 @@ class MenuState extends StatefulWidget {
 class Menu extends State<MenuState> {
   @override
   Widget build(BuildContext context) {
+    run = false;
+    breathCount = 0;
+    circleSize = 0.1;
     return Padding(
       padding: EdgeInsets.all(20),
       child: ListView(

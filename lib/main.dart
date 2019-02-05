@@ -1,4 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:breathe/settings.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -6,7 +8,6 @@ import 'dart:async';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     load();
@@ -46,7 +47,7 @@ const MaterialColor pureBlack = MaterialColor(
   },
 );
 
-var intro;
+var starts;
 var duration;
 var inhaleTime;
 var exhaleTime;
@@ -71,7 +72,7 @@ var circle97 = maxCircleSize * 0.97;
 
 Future<void> load() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
-  intro = (settings.getInt('intro') ?? 0);
+  starts = (settings.getInt('starts') ?? 0);
   duration = (settings.getInt('duration') ?? 3);
   inhaleTime = (settings.getInt('inhaleTime') ?? 7);
   exhaleTime = (settings.getInt('exhaleTime') ?? 7);
@@ -81,7 +82,7 @@ Future<void> load() async {
 
 Future<void> save() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
-  await settings.setInt('intro', intro);
+  await settings.setInt('starts', starts);
   await settings.setInt('duration', duration);
   await settings.setInt('inhaleTime', inhaleTime);
   await settings.setInt('exhaleTime', exhaleTime);
@@ -91,10 +92,60 @@ Future<void> save() async {
 
 Future pause(Duration d) => new Future.delayed(d);
 
-// async
+AudioCache player = new AudioCache();
+
+void sound() {
+  player.play('gong.aac');
+}
+
+void flushbar(context) {
+  var title = "You are valuable!";
+  var message;
+  if (starts < 2) {
+    title = "Welcome!";
+    message = "good to see you!";
+  } else if ((starts % 10) == 0)
+    message = "keep up with regular meditation";
+  else if ((starts % 5) == 0)
+    message = "good to have you back!";
+  else if ((starts % 3 == 0))
+    message = "enjoy your short break";
+  else
+    message = "keep breathing";
+
+  Flushbar()
+    ..title = title
+    ..message = message
+    ..titleText = new Text(title,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+          color: Colors.amber[100],
+        ))
+    ..messageText = new Text(message,
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.amber[200],
+        ))
+    ..duration = Duration(seconds: 5)
+    ..backgroundColor = Colors.black
+    ..mainButton = FlatButton(
+      onPressed: () {
+        settings(context);
+      },
+      child: Text(
+        "SETTINGS",
+        style: TextStyle(color: Colors.amber),
+      ),
+    )
+    ..show(context);
+  starts++;
+  save();
+}
 
 class _MyHomePageState extends State<MyHomePage> {
   void breathe() async {
+    flushbar(context);
     while (run) {
       if (inhale) {
         setState(() {
@@ -113,7 +164,9 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         if (circleSize >= maxCircleSize) {
           inhale = false;
-          await pause(Duration(milliseconds: (inhalePause * 1000)));
+          sound();
+          await pause(Duration(seconds: inhalePause));
+          sound();
         }
         await pause(Duration(milliseconds: (inhaleTime * 10)));
       } else {
@@ -136,7 +189,9 @@ class _MyHomePageState extends State<MyHomePage> {
             breathCount = 0;
             run = false;
           }
-          await pause(Duration(milliseconds: exhalePause * 1000));
+          sound();
+          await pause(Duration(seconds: exhalePause));
+          sound();
         }
         await pause(Duration(milliseconds: (exhaleTime * 10)));
       }
@@ -158,9 +213,6 @@ class _MyHomePageState extends State<MyHomePage> {
             }
           },
           onDoubleTap: () {
-            run = false;
-            breathCount = 0;
-            circleSize = 0.1;
             settings(context);
           },
           child: FractionallySizedBox(
