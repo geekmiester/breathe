@@ -35,9 +35,14 @@ class MenuState extends StatefulWidget {
 class Menu extends State<MenuState> {
   @override
   Widget build(BuildContext context) {
+    var hint = "";
     run = false;
+    inhale = true;
     breathCount = 0;
     circleSize = 0.1;
+    if (starts < 5) {
+      hint = "double-click circle any time to reveal settings";
+    }
     return Padding(
       padding: EdgeInsets.all(20),
       child: ListView(
@@ -127,6 +132,13 @@ class Menu extends State<MenuState> {
                   save();
                 });
               }),
+          Padding(padding: EdgeInsets.all(10)),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(hint,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, color: Colors.white54)),
+          ),
         ],
       ),
     );

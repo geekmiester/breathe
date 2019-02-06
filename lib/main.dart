@@ -54,8 +54,9 @@ var exhaleTime;
 var inhalePause;
 var exhalePause;
 
-bool run = false;
-bool inhale = true;
+var run = false;
+var inhale = true;
+var showIntro = true;
 
 var breathCount = 0;
 
@@ -98,54 +99,57 @@ void sound() {
   player.play('gong.aac');
 }
 
-void flushbar(context) {
-  var title = "You are valuable!";
-  var message;
-  if (starts < 2) {
-    title = "Welcome!";
-    message = "good to see you!";
-  } else if ((starts % 10) == 0)
-    message = "keep up with regular meditation";
-  else if ((starts % 5) == 0)
-    message = "good to have you back!";
-  else if ((starts % 3 == 0))
-    message = "enjoy your short break";
-  else
-    message = "keep breathing";
-
-  Flushbar()
-    ..title = title
-    ..message = message
-    ..titleText = new Text(title,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 18,
-          color: Colors.amber[100],
-        ))
-    ..messageText = new Text(message,
-        style: TextStyle(
-          fontSize: 16,
-          color: Colors.amber[200],
-        ))
-    ..duration = Duration(seconds: 5)
-    ..backgroundColor = Colors.black
-    ..mainButton = FlatButton(
-      onPressed: () {
-        settings(context);
-      },
-      child: Text(
-        "SETTINGS",
-        style: TextStyle(color: Colors.amber),
-      ),
-    )
-    ..show(context);
-  starts++;
-  save();
+void flushbar(context) async {
+  if (showIntro) {
+    showIntro = false;
+    starts++;
+    save();
+    var message;
+    var title = "You are valuable!";
+    var length = 5;
+    if (starts < 3) {
+      title = "Welcome!";
+      message = "good to see you!";
+    } else if ((starts % 10) == 0) {
+      title = "You are awesome!";
+      message = "keep up with regular meditation";
+    } else if ((starts % 5) == 0)
+      message = "good to have you back!";
+    else if ((starts % 3 == 0))
+      message = "enjoy your short break";
+    else
+      message = "keep breathing";
+    Flushbar()
+      ..titleText = new Text(title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            color: Colors.amber[100],
+          ))
+      ..messageText = new Text(message,
+          style: TextStyle(
+            fontSize: 18,
+            color: Colors.amber[200],
+          ))
+      ..duration = Duration(seconds: length)
+      ..backgroundColor = Colors.black
+      ..mainButton = FlatButton(
+        onPressed: () {
+          settings(context);
+        },
+        child: Text(
+          "SETTINGS",
+          style: TextStyle(fontSize: 14, color: Colors.amber),
+        ),
+      )
+      ..show(context);
+    await pause(Duration(seconds: length));
+    showIntro = true;
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   void breathe() async {
-    flushbar(context);
     while (run) {
       if (inhale) {
         setState(() {
@@ -210,6 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
             else {
               run = true;
               breathe();
+              flushbar(context);
             }
           },
           onDoubleTap: () {
