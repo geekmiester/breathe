@@ -53,6 +53,9 @@ var inhaleTime;
 var exhaleTime;
 var inhalePause;
 var exhalePause;
+var inhaleSound = 'inhale.mp3';
+var exhaleSound = 'exhale.mp3';
+var circleImage = 'assets/circle.jpg';
 
 var run = false;
 var inhale = true;
@@ -79,6 +82,9 @@ Future<void> load() async {
   exhaleTime = (settings.getInt('exhaleTime') ?? 7);
   inhalePause = (settings.getInt('inhalePause') ?? 2);
   exhalePause = (settings.getInt('exhalePause') ?? 4);
+  inhaleSound = (settings.getString('inhaleSound') ?? 'inhale.mp3');
+  inhaleSound = (settings.getString('exhaleSound') ?? 'exhale.mp3');
+  circleImage = (settings.getString('circleImage') ?? 'assets/circle.jpg');
 }
 
 Future<void> save() async {
@@ -89,14 +95,17 @@ Future<void> save() async {
   await settings.setInt('exhaleTime', exhaleTime);
   await settings.setInt('inhalePause', inhalePause);
   await settings.setInt('exhalePause', exhalePause);
+  await settings.setString('cirlceImage', circleImage);
+  await settings.setString('inhaleSound', inhaleSound);
+  await settings.setString('exhaleSound', exhaleSound);
 }
 
 Future pause(Duration d) => new Future.delayed(d);
 
 AudioCache player = new AudioCache();
 
-void sound() {
-  player.play('gong.aac');
+void sound(s) {
+  player.play(s);
 }
 
 void flushbar(context) async {
@@ -119,21 +128,21 @@ void flushbar(context) async {
       message = "enjoy your short break";
     else
       message = "keep breathing";
-    Flushbar()
-      ..titleText = new Text(title,
+    Flushbar(
+      titleText: new Text(title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 22,
             color: Colors.amber[100],
-          ))
-      ..messageText = new Text(message,
+          )),
+      messageText: new Text(message,
           style: TextStyle(
             fontSize: 18,
             color: Colors.amber[200],
-          ))
-      ..duration = Duration(seconds: length)
-      ..backgroundColor = Colors.black
-      ..mainButton = FlatButton(
+          )),
+      duration: Duration(seconds: length),
+      backgroundColor: Colors.black,
+      mainButton: FlatButton(
         onPressed: () {
           settings(context);
         },
@@ -141,8 +150,7 @@ void flushbar(context) async {
           "SETTINGS",
           style: TextStyle(fontSize: 14, color: Colors.amber),
         ),
-      )
-      ..show(context);
+      ))..show(context);
     await pause(Duration(seconds: length));
     showIntro = true;
   }
@@ -168,9 +176,9 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         if (circleSize >= maxCircleSize) {
           inhale = false;
-          sound();
+          sound(inhaleSound);
           await pause(Duration(seconds: inhalePause));
-          sound();
+          sound(exhaleSound);
         }
         await pause(Duration(milliseconds: (inhaleTime * 10)));
       } else {
@@ -193,9 +201,9 @@ class _MyHomePageState extends State<MyHomePage> {
             breathCount = 0;
             run = false;
           }
-          sound();
+          sound(exhaleSound);
           await pause(Duration(seconds: exhalePause));
-          sound();
+          sound(inhaleSound);
         }
         await pause(Duration(milliseconds: (exhaleTime * 10)));
       }
@@ -228,7 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.contain,
-                  image: AssetImage('assets/circle.jpg'),
+                  image: AssetImage(circleImage),
                 ),
               ),
             ),
