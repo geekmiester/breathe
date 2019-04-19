@@ -132,6 +132,21 @@ class Menu extends State<MenuState> {
                   save();
                 });
               }),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text("what\'s your name?",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 25, color: Colors.white)),
+          ),
+          TextField(
+            autocorrect: false,
+            maxLines: 1,
+            maxLength: 20,
+            textAlign: TextAlign.center,
+            onChanged: (input) => name = input,
+            controller: TextEditingController(text: name),
+            style: TextStyle(fontSize: 25, color: Colors.white),
+          ),
           Padding(padding: EdgeInsets.all(10)),
           Padding(
             padding: EdgeInsets.all(20),

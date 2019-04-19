@@ -47,12 +47,16 @@ const MaterialColor pureBlack = MaterialColor(
   },
 );
 
+var name;
 var starts;
 var duration;
 var inhaleTime;
 var exhaleTime;
 var inhalePause;
 var exhalePause;
+var endSound = 'end.mp3';
+var startSound = 'start.mp3';
+var pauseSound = 'pause.mp3';
 var inhaleSound = 'inhale.mp3';
 var exhaleSound = 'exhale.mp3';
 var circleImage = 'assets/circle.jpg';
@@ -76,12 +80,16 @@ var circle97 = maxCircleSize * 0.97;
 
 Future<void> load() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
+  name = (settings.getString('name') ?? 'Beautiful');
   starts = (settings.getInt('starts') ?? 0);
   duration = (settings.getInt('duration') ?? 3);
   inhaleTime = (settings.getInt('inhaleTime') ?? 7);
   exhaleTime = (settings.getInt('exhaleTime') ?? 7);
   inhalePause = (settings.getInt('inhalePause') ?? 2);
   exhalePause = (settings.getInt('exhalePause') ?? 4);
+  endSound = (settings.getString('endSound') ?? 'end.mp3');
+  startSound = (settings.getString('startSound') ?? 'start.mp3');
+  pauseSound = (settings.getString('pauseSound') ?? 'pause.mp3');
   inhaleSound = (settings.getString('inhaleSound') ?? 'inhale.mp3');
   inhaleSound = (settings.getString('exhaleSound') ?? 'exhale.mp3');
   circleImage = (settings.getString('circleImage') ?? 'assets/circle.jpg');
@@ -89,15 +97,19 @@ Future<void> load() async {
 
 Future<void> save() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
+  await settings.setString('name', name);
   await settings.setInt('starts', starts);
   await settings.setInt('duration', duration);
   await settings.setInt('inhaleTime', inhaleTime);
   await settings.setInt('exhaleTime', exhaleTime);
   await settings.setInt('inhalePause', inhalePause);
   await settings.setInt('exhalePause', exhalePause);
-  await settings.setString('cirlceImage', circleImage);
+  await settings.setString('endSound', endSound);
+  await settings.setString('startSound', startSound);
+  await settings.setString('pauseSound', pauseSound);
   await settings.setString('inhaleSound', inhaleSound);
   await settings.setString('exhaleSound', exhaleSound);
+  await settings.setString('cirlceImage', circleImage);
 }
 
 Future pause(Duration d) => new Future.delayed(d);
@@ -114,13 +126,13 @@ void flushbar(context) async {
     starts++;
     save();
     var message;
-    var title = "You are valuable!";
+    var title = "You are valuable, " + name + "!";
     var length = 5;
     if (starts < 3) {
-      title = "Welcome!";
+      title = "Welcome, " + name + "!";
       message = "good to see you!";
     } else if ((starts % 10) == 0) {
-      title = "You are awesome!";
+      title = name + ", you are awesome!";
       message = "keep up with regular meditation";
     } else if ((starts % 5) == 0)
       message = "good to have you back!";
@@ -129,28 +141,29 @@ void flushbar(context) async {
     else
       message = "keep breathing";
     Flushbar(
-      titleText: new Text(title,
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-            color: Colors.amber[100],
-          )),
-      messageText: new Text(message,
-          style: TextStyle(
-            fontSize: 18,
-            color: Colors.amber[200],
-          )),
-      duration: Duration(seconds: length),
-      backgroundColor: Colors.black,
-      mainButton: FlatButton(
-        onPressed: () {
-          settings(context);
-        },
-        child: Text(
-          "SETTINGS",
-          style: TextStyle(fontSize: 14, color: Colors.amber),
-        ),
-      ))..show(context);
+        titleText: new Text(title,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+              color: Colors.amber[100],
+            )),
+        messageText: new Text(message,
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.amber[200],
+            )),
+        duration: Duration(seconds: length),
+        backgroundColor: Colors.black,
+        mainButton: FlatButton(
+          onPressed: () {
+            settings(context);
+          },
+          child: Text(
+            "SETTINGS",
+            style: TextStyle(fontSize: 14, color: Colors.amber),
+          ),
+        ))
+      ..show(context);
     await pause(Duration(seconds: length));
     showIntro = true;
   }
@@ -176,7 +189,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
         if (circleSize >= maxCircleSize) {
           inhale = false;
-          sound(inhaleSound);
+          sound(pauseSound);
           await pause(Duration(seconds: inhalePause));
           sound(exhaleSound);
         }
@@ -199,11 +212,14 @@ class _MyHomePageState extends State<MyHomePage> {
               (duration * 60) /
                   (inhaleTime + inhalePause + exhaleTime + exhalePause)) {
             breathCount = 0;
+            sound(endSound);
             run = false;
           }
-          sound(exhaleSound);
-          await pause(Duration(seconds: exhalePause));
-          sound(inhaleSound);
+          if (run) {
+            sound(pauseSound);
+            await pause(Duration(seconds: exhalePause));
+            sound(inhaleSound);
+          }
         }
         await pause(Duration(milliseconds: (exhaleTime * 10)));
       }
@@ -220,6 +236,7 @@ class _MyHomePageState extends State<MyHomePage> {
             if (run)
               run = false;
             else {
+              sound(startSound);
               run = true;
               breathe();
               flushbar(context);
