@@ -40,7 +40,7 @@ class Menu extends State<MenuState> {
     inhale = true;
     breathCount = 0;
     circleSize = 0.1;
-    if (starts < 5) {
+    if (starts < 8) {
       hint = "double-click circle any time to reveal settings";
     }
     return Padding(
