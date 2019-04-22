@@ -147,9 +147,8 @@ class Menu extends State<MenuState> {
             controller: TextEditingController(text: name),
             style: TextStyle(fontSize: 25, color: Colors.white),
           ),
-          Padding(padding: EdgeInsets.all(10)),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(10),
             child: Text(hint,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, color: Colors.white54)),
