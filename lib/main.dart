@@ -236,10 +236,10 @@ class _MyHomePageState extends State<MyHomePage> {
             if (run)
               run = false;
             else {
-              sound(startSound);
               run = true;
               breathe();
               flushbar(context);
+              sound(startSound);
             }
           },
           onDoubleTap: () {
