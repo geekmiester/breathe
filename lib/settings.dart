@@ -143,16 +143,16 @@ class Menu extends State<MenuState> {
             maxLines: 1,
             maxLength: 20,
             textAlign: TextAlign.center,
-            onChanged: (input) => {name = input, save()},
+            onChanged: (input) {
+              name = input;
+              save();
+            },
             controller: TextEditingController(text: name),
             style: TextStyle(fontSize: 25, color: Colors.white),
           ),
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Text(hint,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, color: Colors.white54)),
-          ),
+          Text(hint,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, color: Colors.white54)),
         ],
       ),
     );
