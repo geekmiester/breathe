@@ -44,11 +44,11 @@ class Menu extends State<MenuState> {
       hint = "double-click circle any time to reveal settings";
     }
     return Padding(
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: ListView(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(duration.toString() + " minutes",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
@@ -65,7 +65,7 @@ class Menu extends State<MenuState> {
                 });
               }),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(inhaleTime.toString() + "s " + "inhale",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
@@ -82,7 +82,7 @@ class Menu extends State<MenuState> {
                 });
               }),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(exhaleTime.toString() + "s " + "exhale",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
@@ -99,7 +99,7 @@ class Menu extends State<MenuState> {
                 });
               }),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(inhalePause.toString() + "s " + "pause after inhale",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
@@ -116,7 +116,7 @@ class Menu extends State<MenuState> {
                 });
               }),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text(exhalePause.toString() + "s " + "pause after exhale",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
@@ -133,7 +133,7 @@ class Menu extends State<MenuState> {
                 });
               }),
           Padding(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.symmetric(vertical: 20),
             child: Text("what\'s your name?",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
@@ -154,7 +154,7 @@ class Menu extends State<MenuState> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.only(bottom: 30),
             child: Text(hint,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, color: Colors.white54)),
