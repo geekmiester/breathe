@@ -149,10 +149,16 @@ class Menu extends State<MenuState> {
             },
             controller: TextEditingController(text: name),
             style: TextStyle(fontSize: 25, color: Colors.white),
+            decoration: const InputDecoration(
+              contentPadding: const EdgeInsets.symmetric(vertical: 0),
+            ),
           ),
-          Text(hint,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, color: Colors.white54)),
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Text(hint,
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, color: Colors.white54)),
+          ),
         ],
       ),
     );
