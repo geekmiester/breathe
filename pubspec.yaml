@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 1.2+44
+version: 1.2+45
 
 environment:
   sdk: ">=2.0.0 <3.0.0"
@@ -18,7 +18,6 @@ dependencies:
   flushbar: ^1.4.0
   audioplayers: ^0.10.1
   shared_preferences: ^0.5.2
-  flutter_launcher_icons: ^0.7.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -27,6 +26,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.0
 
 flutter_icons:
   ios: true
