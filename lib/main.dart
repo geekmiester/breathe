@@ -47,13 +47,13 @@ const MaterialColor pureBlack = MaterialColor(
   },
 );
 
-var name;
-var starts;
-var duration;
-var inhaleTime;
-var exhaleTime;
-var inhalePause;
-var exhalePause;
+var name = "Beautiful";
+var starts = 0;
+var duration = 3;
+var inhaleTime = 7;
+var exhaleTime = 7;
+var inhalePause = 2;
+var exhalePause = 4;
 var endSound = 'end.mp3';
 var startSound = 'start.mp3';
 var pauseSound = 'pause.mp3';
