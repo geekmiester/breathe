@@ -19,7 +19,7 @@ class Settings extends StatelessWidget {
           iconTheme: IconThemeData(
             color: Colors.white,
           ),
-          title: new Text("Settings",
+          title: new Text('Settings',
               style: TextStyle(fontSize: 30, color: Colors.white)),
         ),
         backgroundColor: pureBlack,
@@ -35,13 +35,13 @@ class MenuState extends StatefulWidget {
 class Menu extends State<MenuState> {
   @override
   Widget build(BuildContext context) {
-    var hint = "";
+    String hint = '';
     run = false;
     inhale = true;
     breathCount = 0;
     circleSize = 0.1;
     if (starts < 8) {
-      hint = "double-click circle any time to reveal settings";
+      hint = 'double-click circle any time to reveal settings';
     }
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
@@ -49,7 +49,7 @@ class Menu extends State<MenuState> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text(duration.toString() + " minutes",
+            child: Text(duration.toString() + ' minutes',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
           ),
@@ -66,7 +66,7 @@ class Menu extends State<MenuState> {
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text(inhaleTime.toString() + "s " + "inhale",
+            child: Text(inhaleTime.toString() + 's ' + 'inhale',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
           ),
@@ -83,7 +83,7 @@ class Menu extends State<MenuState> {
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text(exhaleTime.toString() + "s " + "exhale",
+            child: Text(exhaleTime.toString() + 's ' + 'exhale',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
           ),
@@ -100,7 +100,7 @@ class Menu extends State<MenuState> {
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text(inhalePause.toString() + "s " + "pause after inhale",
+            child: Text(inhalePause.toString() + 's ' + 'pause after inhale',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
           ),
@@ -117,7 +117,7 @@ class Menu extends State<MenuState> {
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text(exhalePause.toString() + "s " + "pause after exhale",
+            child: Text(exhalePause.toString() + 's ' + 'pause after exhale',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
           ),
@@ -134,7 +134,7 @@ class Menu extends State<MenuState> {
               }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text("what\'s your name?",
+            child: Text('what\'s your name?',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25, color: Colors.white)),
           ),

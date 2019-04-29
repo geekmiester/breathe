@@ -47,36 +47,37 @@ const MaterialColor pureBlack = MaterialColor(
   },
 );
 
-var name = "Beautiful";
-var starts = 0;
-var duration = 3;
-var inhaleTime = 7;
-var exhaleTime = 7;
-var inhalePause = 2;
-var exhalePause = 4;
-var endSound = 'end.mp3';
-var startSound = 'start.mp3';
-var pauseSound = 'pause.mp3';
-var inhaleSound = 'inhale.mp3';
-var exhaleSound = 'exhale.mp3';
-var circleImage = 'assets/circle.jpg';
+String name = 'Beautiful';
+String endSound = 'end.mp3';
+String startSound = 'start.mp3';
+String pauseSound = 'pause.mp3';
+String inhaleSound = 'inhale.mp3';
+String exhaleSound = 'exhale.mp3';
+String circleImage = 'assets/circle.jpg';
 
-var run = false;
-var inhale = true;
-var showIntro = true;
+int starts = 0;
+int duration = 3;
+int inhaleTime = 7;
+int exhaleTime = 7;
+int inhalePause = 2;
+int exhalePause = 4;
 
-var breathCount = 0;
+bool run = false;
+bool inhale = true;
+bool showIntro = true;
 
-var minCircleSize = 0.1;
-var maxCircleSize = 0.9;
-var circleSize = minCircleSize;
+int breathCount = 0;
 
-var circle13 = maxCircleSize * 0.13;
-var circle20 = maxCircleSize * 0.20;
-var circle30 = maxCircleSize * 0.30;
-var circle80 = maxCircleSize * 0.80;
-var circle90 = maxCircleSize * 0.90;
-var circle97 = maxCircleSize * 0.97;
+double minCircleSize = 0.1;
+double maxCircleSize = 0.9;
+double circleSize = minCircleSize;
+
+double circle13 = maxCircleSize * 0.13;
+double circle20 = maxCircleSize * 0.20;
+double circle30 = maxCircleSize * 0.30;
+double circle80 = maxCircleSize * 0.80;
+double circle90 = maxCircleSize * 0.90;
+double circle97 = maxCircleSize * 0.97;
 
 Future<void> load() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
@@ -125,21 +126,21 @@ void flushbar(context) async {
     showIntro = false;
     starts++;
     save();
-    var message;
-    var title = "You are valuable, " + name + "!";
-    var length = 5;
+    String message = ' ';
+    String title = 'You are valuable, ' + name + '!';
+    int length = 5;
     if (starts < 3) {
-      title = "Welcome, " + name + "!";
-      message = "good to see you!";
+      title = 'Welcome, ' + name + '!';
+      message = 'good to see you!';
     } else if ((starts % 10) == 0) {
-      title = name + ", you are awesome!";
-      message = "keep up with regular meditation";
+      title = name + ', you are awesome!';
+      message = 'keep up with regular meditation';
     } else if ((starts % 5) == 0)
-      message = "good to have you back!";
+      message = 'good to have you back!';
     else if ((starts % 3 == 0))
-      message = "enjoy your short break";
+      message = 'enjoy your short break';
     else
-      message = "keep breathing";
+      message = 'keep breathing';
     Flushbar(
         titleText: new Text(title,
             style: TextStyle(
@@ -159,7 +160,7 @@ void flushbar(context) async {
             settings(context);
           },
           child: Text(
-            "SETTINGS",
+            'SETTINGS',
             style: TextStyle(fontSize: 14, color: Colors.amber),
           ),
         ))
