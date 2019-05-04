@@ -47,12 +47,10 @@ class Menu extends State<MenuState> {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: ListView(
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20),
-            child: Text(duration.toString() + ' minutes',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 25, color: Colors.white)),
-          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+          Text(duration.toString() + ' minutes',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 25, color: Colors.white)),
           Slider(
               activeColor: Colors.white,
               value: duration.toDouble(),
@@ -153,12 +151,11 @@ class Menu extends State<MenuState> {
               contentPadding: const EdgeInsets.symmetric(vertical: 0),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(bottom: 30),
-            child: Text(hint,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, color: Colors.white54)),
-          ),
+          Padding(padding: EdgeInsets.only(top: 10)),
+          Text(hint,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, color: Colors.white54)),
+          Padding(padding: EdgeInsets.only(bottom: 30)),
         ],
       ),
     );
