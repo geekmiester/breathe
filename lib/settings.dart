@@ -147,8 +147,8 @@ class Menu extends State<MenuState> {
             },
             controller: TextEditingController(text: name),
             style: TextStyle(fontSize: 25, color: Colors.white),
-            decoration: const InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 0),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical: 0),
             ),
           ),
           Padding(padding: EdgeInsets.only(top: 10)),
