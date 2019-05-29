@@ -26,10 +26,7 @@ class SettingsState extends StatefulWidget {
 class _Settings extends State<SettingsState> {
   @override
   Widget build(BuildContext context) {
-    run = false;
-    inhale = true;
-    breathCount = 0;
-    circleSize = 0.1;
+    resetCircle();
     return Theme(
       data: Theme.of(context).copyWith(
         primaryColor: Colors.black,
@@ -46,7 +43,7 @@ class _Settings extends State<SettingsState> {
                     fontWeight: fontWeight,
                     color: textColor)),
             Slider(
-                activeColor: backgroundColor,
+                activeColor: secondaryColor,
                 inactiveColor: Colors.black,
                 value: duration.toDouble(),
                 min: 1,
@@ -67,7 +64,7 @@ class _Settings extends State<SettingsState> {
                       color: textColor)),
             ),
             Slider(
-                activeColor: backgroundColor,
+                activeColor: secondaryColor,
                 inactiveColor: Colors.black,
                 value: inhaleTime.toDouble(),
                 min: 1,
@@ -88,7 +85,7 @@ class _Settings extends State<SettingsState> {
                       color: textColor)),
             ),
             Slider(
-                activeColor: backgroundColor,
+                activeColor: secondaryColor,
                 inactiveColor: Colors.black,
                 value: exhaleTime.toDouble(),
                 min: 1,
@@ -109,7 +106,7 @@ class _Settings extends State<SettingsState> {
                       color: textColor)),
             ),
             Slider(
-                activeColor: backgroundColor,
+                activeColor: secondaryColor,
                 inactiveColor: Colors.black,
                 value: inhalePause.toDouble(),
                 min: 0,
@@ -130,7 +127,7 @@ class _Settings extends State<SettingsState> {
                       color: textColor)),
             ),
             Slider(
-                activeColor: backgroundColor,
+                activeColor: secondaryColor,
                 inactiveColor: Colors.black,
                 value: exhalePause.toDouble(),
                 min: 0,
@@ -144,7 +141,7 @@ class _Settings extends State<SettingsState> {
             Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
               child: TextField(
-                cursorColor: highlightColor,
+                cursorColor: secondaryColor,
                 keyboardAppearance: Brightness.dark,
                 autocorrect: false,
                 maxLines: 1,
@@ -158,13 +155,13 @@ class _Settings extends State<SettingsState> {
                 style: TextStyle(
                     fontSize: fontSize,
                     fontWeight: fontWeight,
-                    color: highlightColor),
+                    color: secondaryColor),
                 decoration: InputDecoration(
                   hintText: 'your beautiful name',
                   hintStyle: TextStyle(
                       fontSize: fontSize,
                       fontWeight: fontWeight,
-                      color: highlightColor),
+                      color: secondaryColor),
                   contentPadding: EdgeInsets.symmetric(vertical: 0),
                 ),
               ),

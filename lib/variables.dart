@@ -16,11 +16,11 @@ double fontSize = 25;
 
 FontWeight fontWeight = FontWeight.w400;
 
-Color textColor = Colors.amber[100];
+Color textColor = Colors.amberAccent[100];
 
-Color backgroundColor = Colors.amberAccent[400];
+Color secondaryColor = Colors.amberAccent[400];
 
-Color highlightColor = Colors.amberAccent[700];
+Color iconColor = Colors.amberAccent[700];
 
 int starts = 0;
 int duration = 3;

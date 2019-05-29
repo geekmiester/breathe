@@ -77,24 +77,28 @@ class _Breathe extends State<BreatheState> {
       backgroundColor: Colors.black,
       body: Center(
         child: GestureDetector(
-          onTap: () {
-            if (run)
-              run = false;
-            else {
+          onTap: () async {
+            if (run) {
+              resetCircle();
+            } else {
               run = true;
               breathe();
               flushbar(context);
               sound(startSound);
+              await pause(Duration(minutes: duration + 1));
+              resetCircle();
             }
           },
-          onDoubleTap: () {
-            if (run)
-              run = false;
-            else {
+          onDoubleTap: () async {
+            if (run) {
+              resetCircle();
+            } else {
               run = true;
               breathe();
               flushbar(context);
               sound(startSound);
+              await pause(Duration(minutes: duration + 1));
+              resetCircle();
             }
           },
           child: FractionallySizedBox(

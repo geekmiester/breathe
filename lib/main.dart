@@ -30,8 +30,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int tab = 0;
 
-  Color iconColor = highlightColor;
-
   IconData icon = fabBreatheIcon;
 
   Color iconBackgroundColor = Colors.transparent;

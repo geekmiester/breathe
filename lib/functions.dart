@@ -92,3 +92,10 @@ void flushbar(context) async {
     showIntro = true;
   }
 }
+
+void resetCircle() {
+  run = false;
+  inhale = true;
+  breathCount = 0;
+  circleSize = 0.1;
+}
