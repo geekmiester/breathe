@@ -85,7 +85,7 @@ class _Breathe extends State<BreatheState> {
               breathe();
               flushbar(context);
               sound(startSound);
-              await pause(Duration(minutes: duration + 1));
+              await pause(Duration(minutes: (duration + 1)));
               resetCircle();
             }
           },
@@ -97,7 +97,7 @@ class _Breathe extends State<BreatheState> {
               breathe();
               flushbar(context);
               sound(startSound);
-              await pause(Duration(minutes: duration + 1));
+              await pause(Duration(minutes: (duration + 1)));
               resetCircle();
             }
           },
