@@ -3,7 +3,7 @@ import 'package:breathe/breathe.dart';
 import 'package:breathe/settings.dart';
 import 'package:breathe/variables.dart';
 import 'package:breathe/functions.dart';
-
+ 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
