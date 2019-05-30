@@ -35,7 +35,7 @@ class _Settings extends State<SettingsState> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: <Widget>[
-            Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+            Padding(padding: EdgeInsets.only(top: 20)),
             Text(duration.toString() + ' minutes',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -54,15 +54,13 @@ class _Settings extends State<SettingsState> {
                     save();
                   });
                 }),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Text(inhaleTime.toString() + 's ' + 'inhale',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      color: textColor)),
-            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text(inhaleTime.toString() + 's ' + 'inhale',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)),
             Slider(
                 activeColor: secondaryColor,
                 inactiveColor: Colors.black,
@@ -75,15 +73,13 @@ class _Settings extends State<SettingsState> {
                     save();
                   });
                 }),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Text(exhaleTime.toString() + 's ' + 'exhale',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      color: textColor)),
-            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text(exhaleTime.toString() + 's ' + 'exhale',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)),
             Slider(
                 activeColor: secondaryColor,
                 inactiveColor: Colors.black,
@@ -96,15 +92,13 @@ class _Settings extends State<SettingsState> {
                     save();
                   });
                 }),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Text(inhalePause.toString() + 's ' + 'pause after inhale',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      color: textColor)),
-            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text(inhalePause.toString() + 's ' + 'pause after inhale',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)),
             Slider(
                 activeColor: secondaryColor,
                 inactiveColor: Colors.black,
@@ -117,15 +111,13 @@ class _Settings extends State<SettingsState> {
                     save();
                   });
                 }),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: Text(exhalePause.toString() + 's ' + 'pause after exhale',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      color: textColor)),
-            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text(exhalePause.toString() + 's ' + 'pause after exhale',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)),
             Slider(
                 activeColor: secondaryColor,
                 inactiveColor: Colors.black,
@@ -138,35 +130,32 @@ class _Settings extends State<SettingsState> {
                     save();
                   });
                 }),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 20),
-              child: TextField(
-                cursorColor: secondaryColor,
-                keyboardAppearance: Brightness.dark,
-                autocorrect: false,
-                maxLines: 1,
-                maxLength: 20,
-                textAlign: TextAlign.center,
-                onChanged: (input) {
-                  name = input;
-                  save();
-                },
-                controller: TextEditingController(text: name),
-                style: TextStyle(
+            Padding(padding: EdgeInsets.only(top: 20)),
+            TextField(
+              cursorColor: secondaryColor,
+              keyboardAppearance: Brightness.dark,
+              autocorrect: false,
+              maxLines: 1,
+              maxLength: 20,
+              textAlign: TextAlign.center,
+              onChanged: (input) {
+                name = input;
+                save();
+              },
+              controller: TextEditingController(text: name),
+              style: TextStyle(
+                  fontSize: fontSize,
+                  fontWeight: fontWeight,
+                  color: secondaryColor),
+              decoration: InputDecoration(
+                hintText: 'your beautiful name',
+                hintStyle: TextStyle(
                     fontSize: fontSize,
                     fontWeight: fontWeight,
                     color: secondaryColor),
-                decoration: InputDecoration(
-                  hintText: 'your beautiful name',
-                  hintStyle: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      color: secondaryColor),
-                  contentPadding: EdgeInsets.symmetric(vertical: 0),
-                ),
+                contentPadding: EdgeInsets.symmetric(vertical: 0),
               ),
             ),
-            Padding(padding: EdgeInsets.only(bottom: 30)),
           ],
         ),
       ),

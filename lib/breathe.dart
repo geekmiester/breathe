@@ -16,6 +16,9 @@ class BreatheState extends StatefulWidget {
 
 class _Breathe extends State<BreatheState> {
   void breathe() async {
+    run = true;
+    flushbar(context);
+    sound(startSound);
     while (run) {
       if (inhale) {
         setState(() {
@@ -77,28 +80,18 @@ class _Breathe extends State<BreatheState> {
       backgroundColor: Colors.black,
       body: Center(
         child: GestureDetector(
-          onTap: () async {
+          onTap: () {
             if (run) {
               resetCircle();
             } else {
-              run = true;
               breathe();
-              flushbar(context);
-              sound(startSound);
-              await pause(Duration(minutes: (duration + 1)));
-              resetCircle();
             }
           },
-          onDoubleTap: () async {
+          onDoubleTap: () {
             if (run) {
               resetCircle();
             } else {
-              run = true;
               breathe();
-              flushbar(context);
-              sound(startSound);
-              await pause(Duration(minutes: (duration + 1)));
-              resetCircle();
             }
           },
           child: FractionallySizedBox(
