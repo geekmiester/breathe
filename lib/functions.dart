@@ -8,7 +8,7 @@ AudioCache player = new AudioCache();
 
 Future<void> load() async {
   SharedPreferences settings = await SharedPreferences.getInstance();
-  name = (settings.getString('name') ?? 'Beautiful');
+  name = (settings.getString('name') ?? '');
   starts = (settings.getInt('starts') ?? 0);
   duration = (settings.getInt('duration') ?? 3);
   inhaleTime = (settings.getInt('inhaleTime') ?? 7);
