@@ -94,15 +94,18 @@ class _Breathe extends State<BreatheState> {
               breathe();
             }
           },
-          child: FractionallySizedBox(
-            heightFactor: circleSize,
-            widthFactor: circleSize,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage(circleImage),
+          child: AspectRatio(
+            aspectRatio: 1 / 1,
+            child: FractionallySizedBox(
+              heightFactor: circleSize,
+              widthFactor: circleSize,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage(circleImage),
+                  ),
                 ),
               ),
             ),
