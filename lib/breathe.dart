@@ -78,39 +78,56 @@ class _Breathe extends State<BreatheState> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Center(
-        child: GestureDetector(
-          onTap: () {
-            if (run) {
-              resetCircle();
-            } else {
-              breathe();
-            }
-          },
-          onDoubleTap: () {
-            if (run) {
-              resetCircle();
-            } else {
-              breathe();
-            }
-          },
-          child: AspectRatio(
-            aspectRatio: 1 / 1,
-            child: FractionallySizedBox(
-              heightFactor: circleSize,
-              widthFactor: circleSize,
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    fit: BoxFit.contain,
-                    image: AssetImage(circleImage),
+      body: Stack(
+        children: <Widget>[
+          AspectRatio(
+            aspectRatio: 1 / 1.8,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.contain,
+                  image: AssetImage(introImage),
+                ),
+              ),
+            ),
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                if (run) {
+                  resetCircle();
+                } else {
+                  breathe();
+                  introImage = emptyImage;
+                }
+              },
+              onDoubleTap: () {
+                if (run) {
+                  resetCircle();
+                } else {
+                  breathe();
+                  introImage = emptyImage;
+                }
+              },
+              child: AspectRatio(
+                aspectRatio: 1 / 1,
+                child: FractionallySizedBox(
+                  heightFactor: circleSize,
+                  widthFactor: circleSize,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.contain,
+                        image: AssetImage(circleImage),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

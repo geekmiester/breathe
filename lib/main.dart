@@ -4,7 +4,6 @@ import 'package:breathe/breathe.dart';
 import 'package:breathe/settings.dart';
 import 'package:breathe/variables.dart';
 import 'package:breathe/functions.dart';
-import 'package:breathe/intro.dart';
 import 'package:breathe/notifications.dart';
 
 void main() => runApp(MyApp());
@@ -46,12 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int tab = 0;
 
-  IconData icon = fabIntroIcon;
+  IconData icon = fabBreatheIcon;
 
   Color iconBackgroundColor = Colors.transparent;
 
   final List<Widget> tabs = [
-    Intro(),
     Breathe(),
     Settings(),
   ];
@@ -59,12 +57,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     void button() {
-      if ((tab == 0) || (tab == 2)) {
+      if ((tab == 0)) {
         tab = 1;
-        icon = fabBreatheIcon;
-      } else if (tab == 1) {
-        tab = 2;
         icon = fabSettingsIcon;
+      } else if (tab == 1) {
+        tab = 0;
+        icon = fabBreatheIcon;
       }
       setState(() {});
     }

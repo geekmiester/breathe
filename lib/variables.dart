@@ -8,11 +8,12 @@ String inhaleSound = 'inhale.mp3';
 String exhaleSound = 'exhale.mp3';
 String circleImage = 'assets/circle.jpg';
 
+String introImage = 'assets/intro.jpg';
+String emptyImage = 'assets/empty.jpg';
+
 IconData fabBreatheIcon = Icons.more_horiz;
 
 IconData fabSettingsIcon = Icons.check;
-
-IconData fabIntroIcon = Icons.favorite;
 
 double fontSize = 25;
 
