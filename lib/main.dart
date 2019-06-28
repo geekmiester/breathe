@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:breathe/breathe.dart';
 import 'package:breathe/settings.dart';
 import 'package:breathe/variables.dart';
 import 'package:breathe/functions.dart';
 import 'package:breathe/intro.dart';
+import 'package:breathe/notifications.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,6 +31,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  @override
+  initState() {
+    super.initState();
+    var initializationSettingsAndroid =
+        new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = new IOSInitializationSettings();
+    var initializationSettings = new InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: Notifications.onSelectNotification);
+  }
+
   int tab = 0;
 
   IconData icon = fabIntroIcon;

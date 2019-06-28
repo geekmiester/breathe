@@ -24,6 +24,8 @@ Color secondaryColor = Colors.amberAccent[400];
 
 Color iconColor = Colors.amberAccent[700];
 
+DateTime time = DateTime.now();
+
 int starts = 0;
 int duration = 3;
 int inhaleTime = 7;

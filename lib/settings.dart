@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:breathe/variables.dart';
 import 'package:breathe/functions.dart';
+import 'package:breathe/notifications.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -24,6 +26,14 @@ class SettingsState extends StatefulWidget {
 }
 
 class _Settings extends State<SettingsState> {
+  void changeTime(input) {
+    if (input != null) {
+      time = DateTime(0, 0, 0, input.hour, input.minute);
+      Notifications.daily(time);
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     resetCircle();
@@ -154,6 +164,54 @@ class _Settings extends State<SettingsState> {
                     fontWeight: fontWeight,
                     color: secondaryColor),
                 contentPadding: EdgeInsets.symmetric(vertical: 0),
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 5)),
+            Text('daily notification',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)),
+            Theme(
+              // https://github.com/flutter/flutter/blob/master/packages/flutter/lib/src/material/time_picker.dart
+              data: Theme.of(context).copyWith(
+                backgroundColor: secondaryColor,
+                dialogBackgroundColor: Colors.black,
+                brightness: Brightness.dark,
+                accentColor: Colors.black54,
+                buttonTheme: ButtonThemeData(
+                  colorScheme:
+                      ColorScheme.fromSwatch(accentColor: secondaryColor),
+                ),
+              ),
+              child: new Builder(
+                builder: (context) => MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      child: Text(
+                        DateFormat('H:mm').format(time),
+                        style: TextStyle(
+                            fontSize: fontSize,
+                            fontWeight: fontWeight,
+                            color: secondaryColor),
+                      ),
+                      onPressed: () async {
+                        Future<TimeOfDay> getDuration() => showTimePicker(
+                              context: context,
+                              initialTime: TimeOfDay.fromDateTime(time),
+                              builder: (BuildContext context, Widget child) {
+                                return MediaQuery(
+                                  data: MediaQuery.of(context)
+                                      .copyWith(alwaysUse24HourFormat: true),
+                                  child: child,
+                                );
+                              },
+                            );
+                        final input = await getDuration();
+                        return changeTime(input);
+                      },
+                    ),
               ),
             ),
           ],
