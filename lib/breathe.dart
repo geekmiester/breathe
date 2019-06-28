@@ -80,13 +80,15 @@ class _Breathe extends State<BreatheState> {
       backgroundColor: Colors.black,
       body: Stack(
         children: <Widget>[
-          AspectRatio(
-            aspectRatio: 1 / 1.8,
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage(introImage),
+          Center(
+            child: AspectRatio(
+              aspectRatio: 1 / 1.8,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.contain,
+                    image: AssetImage(introImage),
+                  ),
                 ),
               ),
             ),
