@@ -26,6 +26,8 @@ Color iconColor = Colors.amberAccent[700];
 
 DateTime time = DateTime.now();
 
+bool notificationEnabled = false;
+
 int starts = 0;
 int duration = 3;
 int inhaleTime = 7;

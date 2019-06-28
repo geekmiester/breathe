@@ -26,17 +26,39 @@ class SettingsState extends StatefulWidget {
 }
 
 class _Settings extends State<SettingsState> {
-  void changeTime(input) {
+  String notificationButton = '';
+
+  Color notificationButtonColor = textColor;
+
+  void updateTime(TimeOfDay input) {
     if (input != null) {
       time = DateTime(0, 0, 0, input.hour, input.minute);
-      Notifications.daily(time);
-      setState(() {});
+      notificationEnabled = true;
+      updateNotification(false);
     }
+  }
+
+  void updateNotification(bool toggle) {
+    if (((!toggle) && (notificationEnabled)) ||
+        ((toggle) && (!notificationEnabled))) {
+      notificationEnabled = true;
+      Notifications.daily(time);
+      notificationButton = 'daily notification';
+      notificationButtonColor = textColor;
+    } else {
+      notificationEnabled = false;
+      Notifications.cancel();
+      notificationButton = 'daily notification (disabled)';
+      notificationButtonColor = secondaryColor;
+    }
+    save();
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     resetCircle();
+    updateNotification(false);
     return Theme(
       data: Theme.of(context).copyWith(
         primaryColor: Colors.black,
@@ -166,13 +188,20 @@ class _Settings extends State<SettingsState> {
                 contentPadding: EdgeInsets.symmetric(vertical: 0),
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 5)),
-            Text('daily notification',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: fontWeight,
-                    color: textColor)),
+            Padding(padding: EdgeInsets.only(top: 10)),
+            MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              onPressed: () {
+                updateNotification(true);
+              },
+              child: Text(notificationButton,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: fontWeight,
+                      color: notificationButtonColor)),
+            ),
             Theme(
               // https://github.com/flutter/flutter/blob/master/packages/flutter/lib/src/material/time_picker.dart
               data: Theme.of(context).copyWith(
@@ -197,7 +226,7 @@ class _Settings extends State<SettingsState> {
                             color: secondaryColor),
                       ),
                       onPressed: () async {
-                        Future<TimeOfDay> getDuration() => showTimePicker(
+                        Future<TimeOfDay> getTime() => showTimePicker(
                               context: context,
                               initialTime: TimeOfDay.fromDateTime(time),
                               builder: (BuildContext context, Widget child) {
@@ -208,8 +237,8 @@ class _Settings extends State<SettingsState> {
                                 );
                               },
                             );
-                        final input = await getDuration();
-                        return changeTime(input);
+                        final input = await getTime();
+                        return updateTime(input);
                       },
                     ),
               ),
