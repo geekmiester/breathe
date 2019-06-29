@@ -3,6 +3,7 @@ List<Map> techniques = [
 // inhalePause & exhalePause must be int 0-20
   {
     'name': 'custom',
+    'description': '(your choice)',
     'inhaleTime': 7,
     'inhalePause': 2,
     'exhaleTime': 7,
@@ -10,7 +11,8 @@ List<Map> techniques = [
   },
   {
     // https://www.youtube.com/watch?v=7xalaT2FwS8
-    'name': '1:2 (calm & connect)',
+    'name': '1:2',
+    'description': '(calm & connect)',
     'inhaleTime': 4,
     'inhalePause': 0,
     'exhaleTime': 8,
@@ -18,7 +20,8 @@ List<Map> techniques = [
   },
   {
     // https://www.youtube.com/watch?v=gz4G31LGyog
-    'name': '4-7-8 (relax, sleep)',
+    'name': '4-7-8',
+    'description': '(relax & sleep)',
     'inhaleTime': 4,
     'inhalePause': 7,
     'exhaleTime': 8,
@@ -26,7 +29,8 @@ List<Map> techniques = [
   },
   {
     // https://www.youtube.com/watch?v=aXItOY0sLRY
-    'name': 'coherent breathing (calm down)',
+    'name': 'coherent breathing',
+    'description': '(calm down)',
     'inhaleTime': 5,
     'inhalePause': 0,
     'exhaleTime': 5,
@@ -34,7 +38,8 @@ List<Map> techniques = [
   },
   {
     // https://www.youtube.com/watch?v=6RY73nw-jsA
-    'name': 'box breathing (before stressful situations)',
+    'name': 'box breathing',
+    'description': '(before stressful situations)',
     'inhaleTime': 4,
     'inhalePause': 4,
     'exhaleTime': 4,

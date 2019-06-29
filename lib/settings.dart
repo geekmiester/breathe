@@ -84,12 +84,24 @@ class _Settings extends State<SettingsState> {
                   updateBreathingInterval('breathingTechnique');
                   Navigator.of(context).pop();
                 },
-                child: Text(techniques[index]['name'],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: fontSize - 5,
-                        fontWeight: fontWeight,
-                        color: secondaryColor)),
+                child: Column(
+                  children: <Widget>[
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                    Text(techniques[index]['name'],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: fontSize - 5,
+                            fontWeight: fontWeight,
+                            color: secondaryColor)),
+                    Text(techniques[index]['description'],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: fontSize - 5,
+                            fontWeight: fontWeight,
+                            color: secondaryColor)),
+                    Padding(padding: EdgeInsets.only(top: 10)),
+                  ],
+                ),
               ),
           ],
         ),
@@ -109,7 +121,7 @@ class _Settings extends State<SettingsState> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: <Widget>[
-            Padding(padding: EdgeInsets.only(top: 5)),
+            Padding(padding: EdgeInsets.only(top: 20)),
             Text('breathing technique',
                 textAlign: TextAlign.center,
                 style: TextStyle(
