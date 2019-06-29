@@ -12,7 +12,7 @@ class Notifications {
 
   static Future daily(DateTime time) async {
     var _sound = 'gong';
-    var _message = 'time to refuel your energy ☺️';
+    var _message = 'time to refuel your energy 🤗';
     Time _time = Time(time.hour, time.minute);
     if ((name != null) && (name != '')) {
       _message = name + ', ' + _message;

@@ -56,6 +56,11 @@ class _Settings extends State<SettingsState> {
     setState(() {});
   }
 
+  void updateBreathingInterval(String changed) {
+    save();
+    setState(() {});
+  }
+
   Widget breathingTechniquePicker(BuildContext context) {
     return new AlertDialog(
       backgroundColor: Colors.black,
@@ -68,8 +73,7 @@ class _Settings extends State<SettingsState> {
                     borderRadius: BorderRadius.circular(25)),
                 onPressed: () {
                   breathingTechnique = index;
-                  setState(() {});
-                  save();
+                  updateBreathingInterval('breathingTechnique');
                   Navigator.of(context).pop();
                 },
                 child: Text(techniques[index]['name'],
@@ -154,10 +158,8 @@ class _Settings extends State<SettingsState> {
                 min: 1,
                 max: 30,
                 onChanged: (double newValue) {
-                  setState(() {
-                    inhaleTime = newValue.toInt();
-                    save();
-                  });
+                  inhaleTime = newValue.toInt();
+                  updateBreathingInterval('inhaleTime');
                 }),
             Padding(padding: EdgeInsets.only(top: 20)),
             Text(exhaleTime.toString() + 's ' + 'exhale',
@@ -173,10 +175,8 @@ class _Settings extends State<SettingsState> {
                 min: 1,
                 max: 30,
                 onChanged: (double newValue) {
-                  setState(() {
-                    exhaleTime = newValue.toInt();
-                    save();
-                  });
+                  exhaleTime = newValue.toInt();
+                  updateBreathingInterval('exhaleTime');
                 }),
             Padding(padding: EdgeInsets.only(top: 20)),
             Text(inhalePause.toString() + 's ' + 'pause after inhale',
@@ -192,10 +192,8 @@ class _Settings extends State<SettingsState> {
                 min: 0,
                 max: 20,
                 onChanged: (double newValue) {
-                  setState(() {
-                    inhalePause = newValue.toInt();
-                    save();
-                  });
+                  inhalePause = newValue.toInt();
+                  updateBreathingInterval('inhalePause');
                 }),
             Padding(padding: EdgeInsets.only(top: 20)),
             Text(exhalePause.toString() + 's ' + 'pause after exhale',
@@ -211,10 +209,8 @@ class _Settings extends State<SettingsState> {
                 min: 0,
                 max: 20,
                 onChanged: (double newValue) {
-                  setState(() {
-                    exhalePause = newValue.toInt();
-                    save();
-                  });
+                  exhalePause = newValue.toInt();
+                  updateBreathingInterval('exhalePause');
                 }),
             Padding(padding: EdgeInsets.only(top: 20)),
             TextField(
