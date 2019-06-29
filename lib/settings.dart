@@ -57,6 +57,14 @@ class _Settings extends State<SettingsState> {
   }
 
   void updateBreathingInterval(String changed) {
+    if ('breathingTechnique' == changed) {
+      int index = breathingTechnique;
+      inhaleTime = techniques[index]['inhaleTime'];
+      inhalePause = techniques[index]['inhalePause'];
+      exhaleTime = techniques[index]['exhaleTime'];
+      exhalePause = techniques[index]['exhalePause'];
+    } else
+      breathingTechnique = 0;
     save();
     setState(() {});
   }
@@ -81,7 +89,7 @@ class _Settings extends State<SettingsState> {
                     style: TextStyle(
                         fontSize: fontSize - 5,
                         fontWeight: fontWeight,
-                        color: notificationButtonColor)),
+                        color: secondaryColor)),
               ),
           ],
         ),
@@ -101,7 +109,7 @@ class _Settings extends State<SettingsState> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: <Widget>[
-            Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 5)),
             Text('breathing technique',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -162,23 +170,6 @@ class _Settings extends State<SettingsState> {
                   updateBreathingInterval('inhaleTime');
                 }),
             Padding(padding: EdgeInsets.only(top: 20)),
-            Text(exhaleTime.toString() + 's ' + 'exhale',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: fontWeight,
-                    color: textColor)),
-            Slider(
-                activeColor: secondaryColor,
-                inactiveColor: Colors.black,
-                value: exhaleTime.toDouble(),
-                min: 1,
-                max: 30,
-                onChanged: (double newValue) {
-                  exhaleTime = newValue.toInt();
-                  updateBreathingInterval('exhaleTime');
-                }),
-            Padding(padding: EdgeInsets.only(top: 20)),
             Text(inhalePause.toString() + 's ' + 'pause after inhale',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -194,6 +185,23 @@ class _Settings extends State<SettingsState> {
                 onChanged: (double newValue) {
                   inhalePause = newValue.toInt();
                   updateBreathingInterval('inhalePause');
+                }),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text(exhaleTime.toString() + 's ' + 'exhale',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)),
+            Slider(
+                activeColor: secondaryColor,
+                inactiveColor: Colors.black,
+                value: exhaleTime.toDouble(),
+                min: 1,
+                max: 30,
+                onChanged: (double newValue) {
+                  exhaleTime = newValue.toInt();
+                  updateBreathingInterval('exhaleTime');
                 }),
             Padding(padding: EdgeInsets.only(top: 20)),
             Text(exhalePause.toString() + 's ' + 'pause after exhale',
