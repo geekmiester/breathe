@@ -121,7 +121,7 @@ class _Settings extends State<SettingsState> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: <Widget>[
-            Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 25)),
             Text('breathing technique',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -145,7 +145,7 @@ class _Settings extends State<SettingsState> {
                       fontWeight: fontWeight,
                       color: secondaryColor)),
             ),
-            Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 30)),
             Text(duration.toString() + ' minutes',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -232,7 +232,7 @@ class _Settings extends State<SettingsState> {
                   exhalePause = newValue.toInt();
                   updateBreathingInterval('exhalePause');
                 }),
-            Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 25)),
             TextField(
               cursorColor: secondaryColor,
               keyboardAppearance: Brightness.dark,
