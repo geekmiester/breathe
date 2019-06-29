@@ -90,15 +90,15 @@ class _Settings extends State<SettingsState> {
                     Text(techniques[index]['name'],
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: fontSize - 5,
+                            fontSize: fontSize,
                             fontWeight: fontWeight,
                             color: secondaryColor)),
                     Text(techniques[index]['description'],
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: fontSize - 5,
+                            fontSize: fontSize,
                             fontWeight: fontWeight,
-                            color: secondaryColor)),
+                            color: iconColor)),
                     Padding(padding: EdgeInsets.only(top: 10)),
                   ],
                 ),
