@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:breathe/variables.dart';
 import 'package:breathe/functions.dart';
 import 'package:breathe/notifications.dart';
+import 'package:breathe/techniques.dart';
 
 class Settings extends StatelessWidget {
   @override
@@ -55,6 +56,35 @@ class _Settings extends State<SettingsState> {
     setState(() {});
   }
 
+  Widget breathingTechniquePicker(BuildContext context) {
+    return new AlertDialog(
+      backgroundColor: Colors.black,
+      content: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            for (int index = 0; index < techniques.length; index++)
+              MaterialButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
+                onPressed: () {
+                  breathingTechnique = index;
+                  setState(() {});
+                  save();
+                  Navigator.of(context).pop();
+                },
+                child: Text(techniques[index]['name'],
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: fontSize - 5,
+                        fontWeight: fontWeight,
+                        color: notificationButtonColor)),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     resetCircle();
@@ -67,6 +97,30 @@ class _Settings extends State<SettingsState> {
         padding: EdgeInsets.symmetric(horizontal: 20),
         child: ListView(
           children: <Widget>[
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text('breathing technique',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: textColor)),
+            MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) =>
+                      breathingTechniquePicker(context),
+                );
+              },
+              child: Text(techniques[breathingTechnique]['name'],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: fontSize,
+                      fontWeight: fontWeight,
+                      color: secondaryColor)),
+            ),
             Padding(padding: EdgeInsets.only(top: 20)),
             Text(duration.toString() + ' minutes',
                 textAlign: TextAlign.center,

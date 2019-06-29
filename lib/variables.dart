@@ -29,6 +29,8 @@ DateTime time = DateTime.now();
 
 bool notificationEnabled = false;
 
+int breathingTechnique = 0;
+
 int starts = 0;
 int duration = 3;
 int inhaleTime = 7;
