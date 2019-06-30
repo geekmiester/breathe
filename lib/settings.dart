@@ -29,8 +29,6 @@ class SettingsState extends StatefulWidget {
 }
 
 class _Settings extends State<SettingsState> {
-  String notificationButton = '';
-
   Color notificationButtonColor = secondaryColor;
 
   Icon notificationButtonIcon =
@@ -49,14 +47,12 @@ class _Settings extends State<SettingsState> {
         ((toggle) && (!notificationEnabled))) {
       notificationEnabled = true;
       Notifications.daily(time);
-      notificationButton = 'daily notification';
       notificationButtonColor = textColor;
       notificationButtonIcon =
           Icon(Icons.check_box, color: notificationButtonColor);
     } else {
       notificationEnabled = false;
       Notifications.cancel();
-      notificationButton = 'daily notification (disabled)';
       notificationButtonColor = secondaryColor;
       notificationButtonIcon =
           Icon(Icons.check_box_outline_blank, color: notificationButtonColor);
@@ -259,7 +255,7 @@ class _Settings extends State<SettingsState> {
               },
               icon: notificationButtonIcon,
               label: Text(
-                notificationButton,
+                'daily notification',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: fontSize,
