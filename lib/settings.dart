@@ -31,9 +31,10 @@ class SettingsState extends StatefulWidget {
 class _Settings extends State<SettingsState> {
   String notificationButton = '';
 
-  Color notificationButtonColor = textColor;
+  Color notificationButtonColor = secondaryColor;
 
-  Icon notificationButtonIcon = Icon(Icons.check_box_outline_blank);
+  Icon notificationButtonIcon =
+      Icon(Icons.check_box_outline_blank, color: secondaryColor);
 
   void updateTime(TimeOfDay input) {
     if (input != null) {
@@ -50,13 +51,15 @@ class _Settings extends State<SettingsState> {
       Notifications.daily(time);
       notificationButton = 'daily notification';
       notificationButtonColor = textColor;
-      notificationButtonIcon = Icon(Icons.check_box);
+      notificationButtonIcon =
+          Icon(Icons.check_box, color: notificationButtonColor);
     } else {
       notificationEnabled = false;
       Notifications.cancel();
       notificationButton = 'daily notification (disabled)';
       notificationButtonColor = secondaryColor;
-      notificationButtonIcon = Icon(Icons.check_box_outline_blank);
+      notificationButtonIcon =
+          Icon(Icons.check_box_outline_blank, color: notificationButtonColor);
     }
     save();
     setState(() {});
@@ -280,7 +283,7 @@ class _Settings extends State<SettingsState> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25)),
                       child: Text(
-                        DateFormat('H:mm').format(time),
+                        DateFormat('h:mm a').format(time),
                         style: TextStyle(
                             fontSize: fontSize,
                             fontWeight: fontWeight,
