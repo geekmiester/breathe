@@ -38,6 +38,11 @@ int exhaleTime = 7;
 int inhalePause = 2;
 int exhalePause = 4;
 
+int customInhaleTime = 7;
+int customExhaleTime = 7;
+int customInhalePause = 2;
+int customExhalePause = 4;
+
 bool run = false;
 bool inhale = true;
 bool showIntro = true;

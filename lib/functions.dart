@@ -3,6 +3,7 @@ import 'package:flushbar/flushbar.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:breathe/variables.dart';
+import 'package:breathe/techniques.dart';
 
 AudioCache player = new AudioCache();
 
@@ -15,6 +16,10 @@ Future<void> load() async {
   exhaleTime = (settings.getInt('exhaleTime') ?? 7);
   inhalePause = (settings.getInt('inhalePause') ?? 2);
   exhalePause = (settings.getInt('exhalePause') ?? 4);
+  customInhaleTime = (settings.getInt('customInhaleTime') ?? 7);
+  customExhaleTime = (settings.getInt('customExhaleTime') ?? 7);
+  customInhalePause = (settings.getInt('customInhalePause') ?? 2);
+  customExhalePause = (settings.getInt('customExhalePause') ?? 4);
   endSound = (settings.getString('endSound') ?? 'end.mp3');
   startSound = (settings.getString('startSound') ?? 'start.mp3');
   pauseSound = (settings.getString('pauseSound') ?? 'pause.mp3');
@@ -25,6 +30,10 @@ Future<void> load() async {
   notificationEnabled = (settings.getBool('notificationEnabled') ?? false);
   time = DateTime(0, 0, 0, (settings.getInt('notificationHour') ?? 0),
       (settings.getInt('notificationMinute') ?? 0));
+  techniques[0]['inhaleTime'] = customInhaleTime;
+  techniques[0]['exhaleTime'] = customExhaleTime;
+  techniques[0]['inhalePause'] = customInhalePause;
+  techniques[0]['exhalePause'] = customExhalePause;
 }
 
 Future<void> save() async {
@@ -36,6 +45,10 @@ Future<void> save() async {
   await settings.setInt('exhaleTime', exhaleTime);
   await settings.setInt('inhalePause', inhalePause);
   await settings.setInt('exhalePause', exhalePause);
+  await settings.setInt('customInhaleTime', customInhaleTime);
+  await settings.setInt('customExhaleTime', customExhaleTime);
+  await settings.setInt('customInhalePause', customInhalePause);
+  await settings.setInt('customExhalePause', customExhalePause);
   await settings.setString('endSound', endSound);
   await settings.setString('startSound', startSound);
   await settings.setString('pauseSound', pauseSound);

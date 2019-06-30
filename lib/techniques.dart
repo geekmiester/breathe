@@ -1,13 +1,15 @@
+import 'package:breathe/variables.dart';
+
 List<Map> techniques = [
 // inhaleTime & exhaleTime must be int 1-30
 // inhalePause & exhalePause must be int 0-20
   {
     'name': 'custom',
     'description': 'your choice',
-    'inhaleTime': 7,
-    'inhalePause': 2,
-    'exhaleTime': 7,
-    'exhalePause': 4
+    'inhaleTime': customInhaleTime,
+    'inhalePause': customInhalePause,
+    'exhaleTime': customExhaleTime,
+    'exhalePause': customExhalePause
   },
   {
     // https://www.youtube.com/watch?v=7xalaT2FwS8

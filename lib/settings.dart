@@ -63,8 +63,17 @@ class _Settings extends State<SettingsState> {
       inhalePause = techniques[index]['inhalePause'];
       exhaleTime = techniques[index]['exhaleTime'];
       exhalePause = techniques[index]['exhalePause'];
-    } else
+    } else {
       breathingTechnique = 0;
+      customInhaleTime = inhaleTime;
+      customExhaleTime = exhaleTime;
+      customInhalePause = inhalePause;
+      customExhalePause = exhalePause;
+      techniques[0]['inhaleTime'] = customInhaleTime;
+      techniques[0]['exhaleTime'] = customExhaleTime;
+      techniques[0]['inhalePause'] = customInhalePause;
+      techniques[0]['exhalePause'] = customExhalePause;
+    }
     save();
     setState(() {});
   }
@@ -146,25 +155,6 @@ class _Settings extends State<SettingsState> {
                       color: secondaryColor)),
             ),
             Padding(padding: EdgeInsets.only(top: 30)),
-            Text(duration.toString() + ' minutes',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: fontWeight,
-                    color: textColor)),
-            Slider(
-                activeColor: secondaryColor,
-                inactiveColor: Colors.black,
-                value: duration.toDouble(),
-                min: 1,
-                max: 10,
-                onChanged: (double newValue) {
-                  setState(() {
-                    duration = newValue.toInt();
-                    save();
-                  });
-                }),
-            Padding(padding: EdgeInsets.only(top: 20)),
             Text(inhaleTime.toString() + 's ' + 'inhale',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -232,33 +222,26 @@ class _Settings extends State<SettingsState> {
                   exhalePause = newValue.toInt();
                   updateBreathingInterval('exhalePause');
                 }),
-            Padding(padding: EdgeInsets.only(top: 25)),
-            TextField(
-              cursorColor: secondaryColor,
-              keyboardAppearance: Brightness.dark,
-              autocorrect: false,
-              maxLines: 1,
-              maxLength: 20,
-              textAlign: TextAlign.center,
-              onChanged: (input) {
-                name = input;
-                save();
-              },
-              controller: TextEditingController(text: name),
-              style: TextStyle(
-                  fontSize: fontSize,
-                  fontWeight: fontWeight,
-                  color: secondaryColor),
-              decoration: InputDecoration(
-                hintText: 'your beautiful name',
-                hintStyle: TextStyle(
+            Padding(padding: EdgeInsets.only(top: 20)),
+            Text(duration.toString() + ' minutes',
+                textAlign: TextAlign.center,
+                style: TextStyle(
                     fontSize: fontSize,
                     fontWeight: fontWeight,
-                    color: secondaryColor),
-                contentPadding: EdgeInsets.symmetric(vertical: 0),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 10)),
+                    color: textColor)),
+            Slider(
+                activeColor: secondaryColor,
+                inactiveColor: Colors.black,
+                value: duration.toDouble(),
+                min: 1,
+                max: 10,
+                onChanged: (double newValue) {
+                  setState(() {
+                    duration = newValue.toInt();
+                    save();
+                  });
+                }),
+            Padding(padding: EdgeInsets.only(top: 25)),
             MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
@@ -311,6 +294,32 @@ class _Settings extends State<SettingsState> {
                         return updateTime(input);
                       },
                     ),
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            TextField(
+              cursorColor: secondaryColor,
+              keyboardAppearance: Brightness.dark,
+              autocorrect: false,
+              maxLines: 1,
+              maxLength: 20,
+              textAlign: TextAlign.center,
+              onChanged: (input) {
+                name = input;
+                save();
+              },
+              controller: TextEditingController(text: name),
+              style: TextStyle(
+                  fontSize: fontSize,
+                  fontWeight: fontWeight,
+                  color: secondaryColor),
+              decoration: InputDecoration(
+                hintText: 'your beautiful name',
+                hintStyle: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: secondaryColor),
+                contentPadding: EdgeInsets.symmetric(vertical: 0),
               ),
             ),
           ],
