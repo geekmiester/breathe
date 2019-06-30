@@ -13,7 +13,9 @@ class Settings extends StatelessWidget {
           leading: Scaffold(backgroundColor: Colors.black),
           title: new Text('Settings',
               style: TextStyle(
-                  fontSize: 30, fontWeight: fontWeight, color: textColor)),
+                  fontSize: captionFontSize,
+                  fontWeight: fontWeight,
+                  color: textColor)),
           backgroundColor: Colors.black,
         ),
         backgroundColor: Colors.black,
@@ -31,6 +33,8 @@ class _Settings extends State<SettingsState> {
 
   Color notificationButtonColor = textColor;
 
+  Icon notificationButtonIcon = Icon(Icons.check_box_outline_blank);
+
   void updateTime(TimeOfDay input) {
     if (input != null) {
       time = DateTime(0, 0, 0, input.hour, input.minute);
@@ -46,11 +50,13 @@ class _Settings extends State<SettingsState> {
       Notifications.daily(time);
       notificationButton = 'daily notification';
       notificationButtonColor = textColor;
+      notificationButtonIcon = Icon(Icons.check_box);
     } else {
       notificationEnabled = false;
       Notifications.cancel();
       notificationButton = 'daily notification (disabled)';
       notificationButtonColor = secondaryColor;
+      notificationButtonIcon = Icon(Icons.check_box_outline_blank);
     }
     save();
     setState(() {});
@@ -99,7 +105,7 @@ class _Settings extends State<SettingsState> {
                     Text(techniques[index]['name'],
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: fontSize,
+                            fontSize: captionFontSize,
                             fontWeight: fontWeight,
                             color: secondaryColor)),
                     Text(techniques[index]['description'],
@@ -242,29 +248,31 @@ class _Settings extends State<SettingsState> {
                   });
                 }),
             Padding(padding: EdgeInsets.only(top: 25)),
-            MaterialButton(
+            FlatButton.icon(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
               onPressed: () {
                 updateNotification(true);
               },
-              child: Text(notificationButton,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: fontSize,
-                      fontWeight: fontWeight,
-                      color: notificationButtonColor)),
+              icon: notificationButtonIcon,
+              label: Text(
+                notificationButton,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                    color: notificationButtonColor),
+              ),
             ),
             Theme(
               // https://github.com/flutter/flutter/blob/master/packages/flutter/lib/src/material/time_picker.dart
               data: Theme.of(context).copyWith(
-                backgroundColor: secondaryColor,
+                backgroundColor: iconColor,
                 dialogBackgroundColor: Colors.black,
                 brightness: Brightness.dark,
                 accentColor: Colors.black54,
                 buttonTheme: ButtonThemeData(
-                  colorScheme:
-                      ColorScheme.fromSwatch(accentColor: secondaryColor),
+                  colorScheme: ColorScheme.fromSwatch(accentColor: iconColor),
                 ),
               ),
               child: new Builder(
@@ -284,8 +292,10 @@ class _Settings extends State<SettingsState> {
                               initialTime: TimeOfDay.fromDateTime(time),
                               builder: (BuildContext context, Widget child) {
                                 return MediaQuery(
-                                  data: MediaQuery.of(context)
-                                      .copyWith(alwaysUse24HourFormat: true),
+                                  data: MediaQuery.of(context).copyWith(
+                                    alwaysUse24HourFormat: false,
+                                    boldText: true,
+                                  ),
                                   child: child,
                                 );
                               },
@@ -298,7 +308,7 @@ class _Settings extends State<SettingsState> {
             ),
             Padding(padding: EdgeInsets.only(top: 20)),
             TextField(
-              cursorColor: secondaryColor,
+              cursorColor: iconColor,
               keyboardAppearance: Brightness.dark,
               autocorrect: false,
               maxLines: 1,
@@ -310,9 +320,7 @@ class _Settings extends State<SettingsState> {
               },
               controller: TextEditingController(text: name),
               style: TextStyle(
-                  fontSize: fontSize,
-                  fontWeight: fontWeight,
-                  color: secondaryColor),
+                  fontSize: fontSize, fontWeight: fontWeight, color: iconColor),
               decoration: InputDecoration(
                 hintText: 'your beautiful name',
                 hintStyle: TextStyle(

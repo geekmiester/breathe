@@ -16,6 +16,7 @@ IconData fabBreatheIcon = Icons.more_horiz;
 IconData fabSettingsIcon = Icons.check;
 
 double fontSize = 25;
+double captionFontSize = 30;
 
 FontWeight fontWeight = FontWeight.w400;
 
