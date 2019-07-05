@@ -31,7 +31,12 @@ class SettingsState extends StatefulWidget {
 class _Settings extends State<SettingsState> {
   Color notificationButtonColor = secondaryColor;
 
+  Color increasingButtonColor = secondaryColor;
+
   Icon notificationButtonIcon =
+      Icon(Icons.check_box_outline_blank, color: secondaryColor);
+
+  Icon increasingButtonIcon =
       Icon(Icons.check_box_outline_blank, color: secondaryColor);
 
   void updateTime(TimeOfDay input) {
@@ -43,6 +48,7 @@ class _Settings extends State<SettingsState> {
   }
 
   void updateNotification(bool toggle) {
+    // (toggle) = when state is changed by user
     if (((!toggle) && (notificationEnabled)) ||
         ((toggle) && (!notificationEnabled))) {
       notificationEnabled = true;
@@ -56,6 +62,23 @@ class _Settings extends State<SettingsState> {
       notificationButtonColor = secondaryColor;
       notificationButtonIcon =
           Icon(Icons.check_box_outline_blank, color: notificationButtonColor);
+    }
+    save();
+    setState(() {});
+  }
+
+  void updateIncreaseButton(bool toggle) {
+    // (toggle) = when state is changed by user
+    if (((!toggle) && (increasing)) || ((toggle) && (!increasing))) {
+      increasing = true;
+      increasingButtonColor = textColor;
+      increasingButtonIcon =
+          Icon(Icons.check_box, color: increasingButtonColor);
+    } else {
+      increasing = false;
+      increasingButtonColor = secondaryColor;
+      increasingButtonIcon =
+          Icon(Icons.check_box_outline_blank, color: increasingButtonColor);
     }
     save();
     setState(() {});
@@ -127,6 +150,7 @@ class _Settings extends State<SettingsState> {
   Widget build(BuildContext context) {
     resetCircle();
     updateNotification(false);
+    updateIncreaseButton(false);
     return Theme(
       data: Theme.of(context).copyWith(
         primaryColor: Colors.black,
@@ -158,6 +182,48 @@ class _Settings extends State<SettingsState> {
                       fontSize: fontSize,
                       fontWeight: fontWeight,
                       color: secondaryColor)),
+            ),
+            Padding(padding: EdgeInsets.only(top: 5)),
+            FlatButton.icon(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
+              onPressed: () {
+                updateIncreaseButton(true);
+              },
+              icon: increasingButtonIcon,
+              label: Row(
+                children: <Widget>[
+                  Text(
+                    'increasing',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: fontSize,
+                        fontWeight: fontWeight,
+                        color: increasingButtonColor),
+                  ),
+                  Container(
+                    width: 30,
+                    child: FlatButton(
+                      padding: EdgeInsets.only(left: 12),
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                                backgroundColor: Colors.black,
+                                content: Container(
+                                    child: Text(
+                                        'while breathing, on every new inhale the rhythm will get slightly longer',
+                                        style: TextStyle(
+                                            fontSize: fontSize,
+                                            fontWeight: fontWeight,
+                                            color: secondaryColor)))));
+                      },
+                      child: Icon(Icons.info_outline,
+                          color: increasingButtonColor),
+                    ),
+                  )
+                ],
+              ),
             ),
             Padding(padding: EdgeInsets.only(top: 30)),
             Text(inhaleTime.toString() + 's ' + 'inhale',
@@ -238,8 +304,8 @@ class _Settings extends State<SettingsState> {
                 activeColor: secondaryColor,
                 inactiveColor: Colors.black,
                 value: duration.toDouble(),
-                min: 1,
-                max: 10,
+                min: 2,
+                max: 20,
                 onChanged: (double newValue) {
                   setState(() {
                     duration = newValue.toInt();
@@ -276,33 +342,33 @@ class _Settings extends State<SettingsState> {
               ),
               child: new Builder(
                 builder: (context) => MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      child: Text(
-                        DateFormat('h:mm a').format(time),
-                        style: TextStyle(
-                            fontSize: fontSize,
-                            fontWeight: fontWeight,
-                            color: secondaryColor),
-                      ),
-                      onPressed: () async {
-                        Future<TimeOfDay> getTime() => showTimePicker(
-                              context: context,
-                              initialTime: TimeOfDay.fromDateTime(time),
-                              builder: (BuildContext context, Widget child) {
-                                return MediaQuery(
-                                  data: MediaQuery.of(context).copyWith(
-                                    alwaysUse24HourFormat: false,
-                                    boldText: true,
-                                  ),
-                                  child: child,
-                                );
-                              },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  child: Text(
+                    DateFormat('h:mm a').format(time),
+                    style: TextStyle(
+                        fontSize: fontSize,
+                        fontWeight: fontWeight,
+                        color: secondaryColor),
+                  ),
+                  onPressed: () async {
+                    Future<TimeOfDay> getTime() => showTimePicker(
+                          context: context,
+                          initialTime: TimeOfDay.fromDateTime(time),
+                          builder: (BuildContext context, Widget child) {
+                            return MediaQuery(
+                              data: MediaQuery.of(context).copyWith(
+                                alwaysUse24HourFormat: false,
+                                boldText: true,
+                              ),
+                              child: child,
                             );
-                        final input = await getTime();
-                        return updateTime(input);
-                      },
-                    ),
+                          },
+                        );
+                    final input = await getTime();
+                    return updateTime(input);
+                  },
+                ),
               ),
             ),
             Padding(padding: EdgeInsets.only(top: 20)),

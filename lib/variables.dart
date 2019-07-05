@@ -30,7 +30,11 @@ DateTime time = DateTime.now();
 
 bool notificationEnabled = false;
 
-int breathingTechnique = 0;
+bool increasing = false;
+
+double increaseFactor = 0.05;
+
+int breathingTechnique = 3;
 
 int starts = 0;
 int duration = 3;

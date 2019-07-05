@@ -26,7 +26,8 @@ Future<void> load() async {
   inhaleSound = (settings.getString('inhaleSound') ?? 'inhale.mp3');
   inhaleSound = (settings.getString('exhaleSound') ?? 'exhale.mp3');
   circleImage = (settings.getString('circleImage') ?? 'assets/circle.jpg');
-  breathingTechnique = (settings.getInt('breathingTechnique') ?? 0);
+  breathingTechnique = (settings.getInt('breathingTechnique') ?? 3);
+  increasing = (settings.getBool('increasing') ?? false);
   notificationEnabled = (settings.getBool('notificationEnabled') ?? false);
   time = DateTime(0, 0, 0, (settings.getInt('notificationHour') ?? 0),
       (settings.getInt('notificationMinute') ?? 0));
@@ -34,6 +35,8 @@ Future<void> load() async {
   techniques[0]['exhaleTime'] = customExhaleTime;
   techniques[0]['inhalePause'] = customInhalePause;
   techniques[0]['exhalePause'] = customExhalePause;
+  if (duration == 1) duration = 2;
+  // for people updated from recent versions where duration = 1 was possible
 }
 
 Future<void> save() async {
@@ -56,6 +59,7 @@ Future<void> save() async {
   await settings.setString('exhaleSound', exhaleSound);
   await settings.setString('cirlceImage', circleImage);
   await settings.setInt('breathingTechnique', breathingTechnique);
+  await settings.setBool('increasing', increasing);
   await settings.setBool('notificationEnabled', notificationEnabled);
   await settings.setInt('notificationHour', time.hour);
   await settings.setInt('notificationMinute', time.minute);
