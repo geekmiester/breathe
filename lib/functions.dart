@@ -24,7 +24,7 @@ Future<void> load() async {
   startSound = (settings.getString('startSound') ?? 'start.mp3');
   pauseSound = (settings.getString('pauseSound') ?? 'pause.mp3');
   inhaleSound = (settings.getString('inhaleSound') ?? 'inhale.mp3');
-  inhaleSound = (settings.getString('exhaleSound') ?? 'exhale.mp3');
+  exhaleSound = (settings.getString('exhaleSound') ?? 'exhale.mp3');
   circleImage = (settings.getString('circleImage') ?? 'assets/circle.jpg');
   breathingTechnique = (settings.getInt('breathingTechnique') ?? 3);
   increasing = (settings.getBool('increasing') ?? false);
