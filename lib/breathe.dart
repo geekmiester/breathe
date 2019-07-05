@@ -20,11 +20,16 @@ class _Breathe extends State<BreatheState> {
     run = true;
     flushbar(context);
     sound(startSound);
+
     Vibrate.feedback(FeedbackType.success);
+    // https://pub.dev/packages/vibrate
+    // https://developer.apple.com/design/human-interface-guidelines/ios/user-interaction/haptics/
+
     double breatheInhaleTime = inhaleTime.toDouble();
     double breatheExhaleTime = exhaleTime.toDouble();
     double breatheInhalePause = inhalePause.toDouble();
     double breatheExhalePause = exhalePause.toDouble();
+
     while (run) {
       if (inhale) {
         setState(() {
@@ -72,7 +77,7 @@ class _Breathe extends State<BreatheState> {
                   (inhaleTime + inhalePause + exhaleTime + exhalePause)) {
             breathCount = 0;
             sound(endSound);
-            Vibrate.feedback(FeedbackType.success);
+            Vibrate.feedback(FeedbackType.error);
             run = false;
           }
 
