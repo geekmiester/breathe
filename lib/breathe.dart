@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vibrate/vibrate.dart';
 import 'package:breathe/variables.dart';
 import 'package:breathe/functions.dart';
 
@@ -20,10 +19,6 @@ class _Breathe extends State<BreatheState> {
     run = true;
     flushbar(context);
     sound(startSound);
-
-    Vibrate.feedback(FeedbackType.success);
-    // https://pub.dev/packages/vibrate
-    // https://developer.apple.com/design/human-interface-guidelines/ios/user-interaction/haptics/
 
     double breatheInhaleTime = inhaleTime.toDouble();
     double breatheExhaleTime = exhaleTime.toDouble();
@@ -77,7 +72,7 @@ class _Breathe extends State<BreatheState> {
                   (inhaleTime + inhalePause + exhaleTime + exhalePause)) {
             breathCount = 0;
             sound(endSound);
-            Vibrate.feedback(FeedbackType.error);
+            hapticFeedback('stop');
             run = false;
           }
 
@@ -126,17 +121,21 @@ class _Breathe extends State<BreatheState> {
               onTap: () {
                 if (run) {
                   resetCircle();
+                  hapticFeedback('stop');
                 } else {
                   breathe();
                   introImage = emptyImage;
+                  hapticFeedback('start');
                 }
               },
               onDoubleTap: () {
                 if (run) {
                   resetCircle();
+                  hapticFeedback('stop');
                 } else {
                   breathe();
                   introImage = emptyImage;
+                  hapticFeedback('start');
                 }
               },
               child: AspectRatio(

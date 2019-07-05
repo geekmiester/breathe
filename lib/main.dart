@@ -86,7 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             button();
-            Vibrate.feedback(FeedbackType.light);
+            hapticFeedback('tap');
           },
           elevation: 0,
           child: Icon(icon, color: iconColor),

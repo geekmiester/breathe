@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vibrate/vibrate.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,8 +68,8 @@ Future<void> save() async {
 
 Future pause(Duration d) => new Future.delayed(d);
 
-void sound(s) {
-  player.play(s);
+void sound(sound) {
+  player.play(sound);
 }
 
 void flushbar(context) async {
@@ -123,4 +124,18 @@ void resetCircle() {
   inhale = true;
   breathCount = 0;
   circleSize = 0.1;
+}
+
+void hapticFeedback(String feedback) {
+  // https://pub.dev/packages/vibrate
+  // https://developer.apple.com/design/human-interface-guidelines/ios/user-interaction/haptics/
+  if (feedback == 'tap') {
+    Vibrate.feedback(FeedbackType.light);
+  }
+  if (feedback == 'start') {
+    Vibrate.feedback(FeedbackType.success);
+  }
+  if (feedback == 'stop') {
+    Vibrate.feedback(FeedbackType.warning);
+  }
 }
