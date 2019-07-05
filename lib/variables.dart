@@ -32,7 +32,7 @@ bool notificationEnabled = false;
 
 bool increasing = false;
 
-double increaseFactor = 0.05;
+double increaseFactor = 0.02;
 
 int breathingTechnique = 3;
 

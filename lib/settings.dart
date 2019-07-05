@@ -202,9 +202,9 @@ class _Settings extends State<SettingsState> {
                         color: increasingButtonColor),
                   ),
                   Container(
-                    width: 30,
+                    width: 38,
                     child: FlatButton(
-                      padding: EdgeInsets.only(left: 12),
+                      padding: EdgeInsets.symmetric(vertical: 8),
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -212,7 +212,7 @@ class _Settings extends State<SettingsState> {
                                 backgroundColor: Colors.black,
                                 content: Container(
                                     child: Text(
-                                        'while breathing, on every new inhale the rhythm will get slightly longer',
+                                        'while breathing, on every new cycle the intervals get slightly longer',
                                         style: TextStyle(
                                             fontSize: fontSize,
                                             fontWeight: fontWeight,

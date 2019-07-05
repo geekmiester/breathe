@@ -39,6 +39,7 @@ class _Breathe extends State<BreatheState> {
           else
             circleSize = circleSize + 0.01;
         });
+
         if (circleSize >= maxCircleSize) {
           inhale = false;
           sound(pauseSound);
@@ -46,6 +47,7 @@ class _Breathe extends State<BreatheState> {
               Duration(milliseconds: (breatheInhalePause * 1000).toInt()));
           sound(exhaleSound);
         }
+
         await pause(Duration(milliseconds: (breatheInhaleTime * 10).toInt()));
       } else {
         setState(() {
@@ -58,6 +60,7 @@ class _Breathe extends State<BreatheState> {
           else
             circleSize = circleSize - 0.01;
         });
+
         if (circleSize <= minCircleSize) {
           inhale = true;
           breathCount++;
@@ -69,12 +72,14 @@ class _Breathe extends State<BreatheState> {
             sound(endSound);
             run = false;
           }
+
           if (run) {
             sound(pauseSound);
             await pause(
                 Duration(milliseconds: (breatheExhalePause * 1000).toInt()));
             sound(inhaleSound);
           }
+
           if (increasing) {
             breatheInhaleTime = breatheInhaleTime + inhaleTime * increaseFactor;
             breatheInhalePause =
