@@ -72,7 +72,7 @@ class _Breathe extends State<BreatheState> {
                   (inhaleTime + inhalePause + exhaleTime + exhalePause)) {
             breathCount = 0;
             sound(endSound);
-            hapticFeedback('stop');
+            hapticFeedback('end');
             run = false;
           }
 

@@ -138,4 +138,7 @@ void hapticFeedback(String feedback) {
   if (feedback == 'stop') {
     Vibrate.feedback(FeedbackType.warning);
   }
+  if (feedback == 'end') {
+    Vibrate.feedback(FeedbackType.error);
+  }
 }
