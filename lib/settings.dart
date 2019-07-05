@@ -299,7 +299,7 @@ class _Settings extends State<SettingsState> {
                                 backgroundColor: Colors.black,
                                 content: Container(
                                     child: Text(
-                                        'you start with the selected rhythm. the intervals become slightly longer with every cycle.',
+                                        'you begin with the selected rhythm. the intervals become slightly longer with every cycle.',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: fontSize,
