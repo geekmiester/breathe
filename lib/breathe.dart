@@ -72,6 +72,7 @@ class _Breathe extends State<BreatheState> {
                   (inhaleTime + inhalePause + exhaleTime + exhalePause)) {
             breathCount = 0;
             sound(endSound);
+            Vibrate.feedback(FeedbackType.success);
             run = false;
           }
 
