@@ -212,7 +212,7 @@ class _Settings extends State<SettingsState> {
                                 backgroundColor: Colors.black,
                                 content: Container(
                                     child: Text(
-                                        'while breathing, on every new cycle the intervals get slightly longer',
+                                        'while breathing, on every new cycle the intervals become slightly longer',
                                         style: TextStyle(
                                             fontSize: fontSize,
                                             fontWeight: fontWeight,
