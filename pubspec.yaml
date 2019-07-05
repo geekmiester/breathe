@@ -16,6 +16,7 @@ dependencies:
   flutter:
     sdk: flutter
   intl: ^0.15.8
+  vibrate: ^0.0.4
   flushbar: ^1.7.0
   audioplayers: ^0.12.0
   shared_preferences: ^0.5.2+1

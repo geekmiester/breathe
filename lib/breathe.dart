@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vibrate/vibrate.dart';
 import 'package:breathe/variables.dart';
 import 'package:breathe/functions.dart';
 
@@ -19,6 +20,7 @@ class _Breathe extends State<BreatheState> {
     run = true;
     flushbar(context);
     sound(startSound);
+    Vibrate.feedback(FeedbackType.success);
     double breatheInhaleTime = inhaleTime.toDouble();
     double breatheExhaleTime = exhaleTime.toDouble();
     double breatheInhalePause = inhalePause.toDouble();

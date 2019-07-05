@@ -32,6 +32,8 @@ bool notificationEnabled = false;
 
 bool increasing = false;
 
+bool vibration = false;
+
 double increaseFactor = 0.02;
 
 int breathingTechnique = 3;

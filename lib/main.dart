@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:vibrate/vibrate.dart';
 import 'package:breathe/breathe.dart';
 import 'package:breathe/settings.dart';
 import 'package:breathe/variables.dart';
@@ -33,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   initState() {
     super.initState();
+    initVibration();
     var initializationSettingsAndroid =
         new AndroidInitializationSettings('@mipmap/ic_launcher');
     var initializationSettingsIOS = new IOSInitializationSettings();
@@ -41,6 +43,13 @@ class _MyHomePageState extends State<MyHomePage> {
     flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onSelectNotification: Notifications.onSelectNotification);
+  }
+
+  void initVibration() async {
+    bool canVibrate = await Vibrate.canVibrate;
+    setState(() {
+      vibration = canVibrate;
+    });
   }
 
   int tab = 0;
@@ -73,6 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             button();
+            Vibrate.feedback(FeedbackType.light);
           },
           elevation: 0,
           child: Icon(icon, color: iconColor),

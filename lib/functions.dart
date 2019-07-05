@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vibrate/vibrate.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -123,4 +124,5 @@ void resetCircle() {
   inhale = true;
   breathCount = 0;
   circleSize = 0.1;
+  Vibrate.feedback(FeedbackType.success);
 }
