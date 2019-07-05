@@ -291,7 +291,7 @@ class _Settings extends State<SettingsState> {
                   Container(
                     width: 38,
                     child: FlatButton(
-                      padding: EdgeInsets.symmetric(vertical: 8),
+                      padding: EdgeInsets.symmetric(vertical: 0),
                       onPressed: () {
                         showDialog(
                             context: context,
@@ -299,7 +299,7 @@ class _Settings extends State<SettingsState> {
                                 backgroundColor: Colors.black,
                                 content: Container(
                                     child: Text(
-                                        'you begin with the selected rhythm. the intervals become slightly longer with every cycle.',
+                                        'you begin with the selected rhythm \n \n the interval becomes slightly longer with every cycle',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: fontSize,
