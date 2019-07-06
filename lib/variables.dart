@@ -55,6 +55,7 @@ bool inhale = true;
 bool showIntro = true;
 
 int breathCount = 0;
+int starthashCode = 0;
 
 double minCircleSize = 0.1;
 double maxCircleSize = 0.9;

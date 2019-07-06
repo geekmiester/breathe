@@ -17,6 +17,10 @@ class BreatheState extends StatefulWidget {
 class _Breathe extends State<BreatheState> {
   void breathe() async {
     run = true;
+
+    starthashCode = DateTime.now().hashCode;
+    int cycleHashCode = starthashCode;
+
     flushbar(context);
     sound(startSound);
 
@@ -25,7 +29,7 @@ class _Breathe extends State<BreatheState> {
     double breatheExhaleTime = exhaleTime.toDouble();
     double breatheExhalePause = exhalePause.toDouble();
 
-    while (run) {
+    while ((run) && (cycleHashCode == starthashCode)) {
       if (inhale) {
         setState(() {
           if (circleSize < circle20)
@@ -42,15 +46,15 @@ class _Breathe extends State<BreatheState> {
             circleSize = circleSize + 0.01;
         });
 
+        await pause(Duration(milliseconds: (breatheInhaleTime * 10).toInt()));
+
         if (circleSize >= maxCircleSize) {
           inhale = false;
           sound(pauseSound);
           await pause(
               Duration(milliseconds: (breatheInhalePause * 1000).toInt()));
-          sound(exhaleSound);
+          if ((run) && (cycleHashCode == starthashCode)) sound(exhaleSound);
         }
-
-        await pause(Duration(milliseconds: (breatheInhaleTime * 10).toInt()));
       } else {
         setState(() {
           if (circleSize < circle13)
@@ -62,6 +66,8 @@ class _Breathe extends State<BreatheState> {
           else
             circleSize = circleSize - 0.01;
         });
+
+        await pause(Duration(milliseconds: (breatheExhaleTime * 10).toInt()));
 
         if (circleSize <= minCircleSize) {
           inhale = true;
@@ -80,7 +86,7 @@ class _Breathe extends State<BreatheState> {
             sound(pauseSound);
             await pause(
                 Duration(milliseconds: (breatheExhalePause * 1000).toInt()));
-            sound(inhaleSound);
+            if ((run) && (cycleHashCode == starthashCode)) sound(inhaleSound);
           }
 
           if (increasing) {
@@ -92,7 +98,6 @@ class _Breathe extends State<BreatheState> {
                 breatheExhalePause + exhalePause * increaseFactor;
           }
         }
-        await pause(Duration(milliseconds: (breatheExhaleTime * 10).toInt()));
       }
     }
   }
