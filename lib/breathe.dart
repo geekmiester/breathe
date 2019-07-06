@@ -91,7 +91,7 @@ class _Breathe extends State<BreatheState> {
           }
 
           if (run) {
-            if (exhalePause < 0) sound(exhalePauseSound);
+            if (exhalePause > 0) sound(exhalePauseSound);
             await pause(
                 Duration(milliseconds: (breatheExhalePause * 1000).toInt()));
             if ((run) && (cycleHashCode == starthashCode)) sound(inhaleSound);
