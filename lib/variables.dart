@@ -40,15 +40,15 @@ int breathingTechnique = 3;
 
 int starts = 0;
 int duration = 3;
-int inhaleTime = 7;
-int exhaleTime = 7;
-int inhalePause = 2;
-int exhalePause = 4;
+int inhaleTime = 5;
+int inhalePause = 0;
+int exhaleTime = 5;
+int exhalePause = 0;
 
-int customInhaleTime = 7;
-int customExhaleTime = 7;
-int customInhalePause = 2;
-int customExhalePause = 4;
+int customInhaleTime = 5;
+int customInhalePause = 0;
+int customExhaleTime = 5;
+int customExhalePause = 0;
 
 bool run = false;
 bool inhale = true;

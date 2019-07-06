@@ -94,12 +94,13 @@ class _Settings extends State<SettingsState> {
     } else {
       breathingTechnique = 0;
       customInhaleTime = inhaleTime;
-      customExhaleTime = exhaleTime;
       customInhalePause = inhalePause;
+      customExhaleTime = exhaleTime;
       customExhalePause = exhalePause;
+
       techniques[0]['inhaleTime'] = customInhaleTime;
-      techniques[0]['exhaleTime'] = customExhaleTime;
       techniques[0]['inhalePause'] = customInhalePause;
+      techniques[0]['exhaleTime'] = customExhaleTime;
       techniques[0]['exhalePause'] = customExhalePause;
     }
     save();

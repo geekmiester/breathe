@@ -21,8 +21,8 @@ class _Breathe extends State<BreatheState> {
     sound(startSound);
 
     double breatheInhaleTime = inhaleTime.toDouble();
-    double breatheExhaleTime = exhaleTime.toDouble();
     double breatheInhalePause = inhalePause.toDouble();
+    double breatheExhaleTime = exhaleTime.toDouble();
     double breatheExhalePause = exhalePause.toDouble();
 
     while (run) {
