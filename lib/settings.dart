@@ -302,12 +302,12 @@ class _Settings extends State<SettingsState> {
                                   backgroundColor: Colors.black,
                                   content: Container(
                                       child: Text(
-                                          'you begin with the selected rhythm \n \n the interval becomes slightly longer with every cycle',
+                                          'you begin with the selected rhythm \n \n every cycle the interval becomes slightly longer',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
-                                              fontSize: fontSize,
+                                              fontSize: captionFontSize,
                                               fontWeight: fontWeight,
-                                              color: secondaryColor)))));
+                                              color: iconColor)))));
                         },
                         child: Icon(Icons.info_outline,
                             color: increasingButtonColor),
