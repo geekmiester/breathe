@@ -118,17 +118,7 @@ class _Breathe extends State<BreatheState> {
           ),
           Center(
             child: GestureDetector(
-              onTap: () {
-                if (run) {
-                  resetCircle();
-                  hapticFeedback('stop');
-                } else {
-                  breathe();
-                  introImage = emptyImage;
-                  hapticFeedback('start');
-                }
-              },
-              onDoubleTap: () {
+              onPanDown: (context) {
                 if (run) {
                   resetCircle();
                   hapticFeedback('stop');
