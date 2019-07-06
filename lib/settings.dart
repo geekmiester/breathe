@@ -272,46 +272,49 @@ class _Settings extends State<SettingsState> {
                   });
                 }),
             Padding(padding: EdgeInsets.only(top: 25)),
-            FlatButton.icon(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-              onPressed: () {
-                updateIncreaseButton(true);
-              },
-              icon: increasingButtonIcon,
-              label: Row(
-                children: <Widget>[
-                  Text(
-                    'increasing',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: fontSize,
-                        fontWeight: fontWeight,
-                        color: increasingButtonColor),
-                  ),
-                  Container(
-                    width: 38,
-                    child: FlatButton(
-                      padding: EdgeInsets.symmetric(vertical: 0),
-                      onPressed: () {
-                        showDialog(
-                            context: context,
-                            builder: (BuildContext context) => AlertDialog(
-                                backgroundColor: Colors.black,
-                                content: Container(
-                                    child: Text(
-                                        'you begin with the selected rhythm \n \n the interval becomes slightly longer with every cycle',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: fontSize,
-                                            fontWeight: fontWeight,
-                                            color: secondaryColor)))));
-                      },
-                      child: Icon(Icons.info_outline,
+            Padding(
+              padding: EdgeInsets.only(left: 15),
+              child: FlatButton.icon(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
+                onPressed: () {
+                  updateIncreaseButton(true);
+                },
+                icon: increasingButtonIcon,
+                label: Row(
+                  children: <Widget>[
+                    Text(
+                      'increasing',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: fontSize,
+                          fontWeight: fontWeight,
                           color: increasingButtonColor),
                     ),
-                  )
-                ],
+                    Container(
+                      width: 38,
+                      child: FlatButton(
+                        padding: EdgeInsets.symmetric(vertical: 0),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) => AlertDialog(
+                                  backgroundColor: Colors.black,
+                                  content: Container(
+                                      child: Text(
+                                          'you begin with the selected rhythm \n \n the interval becomes slightly longer with every cycle',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: fontSize,
+                                              fontWeight: fontWeight,
+                                              color: secondaryColor)))));
+                        },
+                        child: Icon(Icons.info_outline,
+                            color: increasingButtonColor),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Padding(padding: EdgeInsets.only(top: 5)),
