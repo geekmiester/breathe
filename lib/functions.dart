@@ -30,7 +30,11 @@ Future<void> load() async {
   breathingTechnique = (settings.getInt('breathingTechnique') ?? 3);
   increasing = (settings.getBool('increasing') ?? false);
   notificationEnabled = (settings.getBool('notificationEnabled') ?? false);
-  time = DateTime(0, 0, 0, (settings.getInt('notificationHour') ?? 0),
+  time = DateTime(
+      0,
+      0,
+      0,
+      (settings.getInt('notificationHour') ?? (DateTime.now().hour) + 1),
       (settings.getInt('notificationMinute') ?? 0));
   techniques[0]['inhaleTime'] = customInhaleTime;
   techniques[0]['exhaleTime'] = customExhaleTime;
