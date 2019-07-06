@@ -273,7 +273,7 @@ class _Settings extends State<SettingsState> {
                 }),
             Padding(padding: EdgeInsets.only(top: 25)),
             Padding(
-              padding: EdgeInsets.only(left: 12),
+              padding: EdgeInsets.only(left: 13),
               child: FlatButton.icon(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
