@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 String name = '';
 String endSound = 'end.mp3';
 String startSound = 'start.mp3';
-String pauseSound = 'pause.mp3';
 String inhaleSound = 'inhale.mp3';
 String exhaleSound = 'exhale.mp3';
+String inhalePauseSound = 'inhalePause.mp3';
+String exhalePauseSound = 'exhalePause.mp3';
 String circleImage = 'assets/circle.jpg';
 
 String introImage = 'assets/intro.jpg';

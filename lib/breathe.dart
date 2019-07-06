@@ -21,6 +21,9 @@ class _Breathe extends State<BreatheState> {
     starthashCode = DateTime.now().hashCode;
     int cycleHashCode = starthashCode;
 
+    DateTime maxDuration =
+        DateTime.now().add(Duration(minutes: (duration + 2)));
+
     flushbar(context);
     sound(startSound);
 
@@ -29,7 +32,12 @@ class _Breathe extends State<BreatheState> {
     double breatheExhaleTime = exhaleTime.toDouble();
     double breatheExhalePause = exhalePause.toDouble();
 
-    while ((run) && (cycleHashCode == starthashCode)) {
+    while ((run) &&
+        (cycleHashCode == starthashCode) &&
+        // if user stops and starts again, the startHashCode will be different
+        // and stop 'old' functions
+        // if user puts app in background and comes back later, the function is stopped:
+        (DateTime.now().isBefore(maxDuration))) {
       if (inhale) {
         setState(() {
           if (circleSize < circle20)
@@ -50,7 +58,7 @@ class _Breathe extends State<BreatheState> {
 
         if (circleSize >= maxCircleSize) {
           inhale = false;
-          sound(pauseSound);
+          if (inhalePause > 0) sound(inhalePauseSound);
           await pause(
               Duration(milliseconds: (breatheInhalePause * 1000).toInt()));
           if ((run) && (cycleHashCode == starthashCode)) sound(exhaleSound);
@@ -83,7 +91,7 @@ class _Breathe extends State<BreatheState> {
           }
 
           if (run) {
-            sound(pauseSound);
+            if (exhalePause < 0) sound(exhalePauseSound);
             await pause(
                 Duration(milliseconds: (breatheExhalePause * 1000).toInt()));
             if ((run) && (cycleHashCode == starthashCode)) sound(inhaleSound);

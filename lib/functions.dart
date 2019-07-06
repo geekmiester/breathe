@@ -23,9 +23,12 @@ Future<void> load() async {
   customExhalePause = (settings.getInt('customExhalePause') ?? 0);
   endSound = (settings.getString('endSound') ?? 'end.mp3');
   startSound = (settings.getString('startSound') ?? 'start.mp3');
-  pauseSound = (settings.getString('pauseSound') ?? 'pause.mp3');
   inhaleSound = (settings.getString('inhaleSound') ?? 'inhale.mp3');
   exhaleSound = (settings.getString('exhaleSound') ?? 'exhale.mp3');
+  inhalePauseSound =
+      (settings.getString('inhalePauseSound') ?? 'inhalePause.mp3');
+  exhalePauseSound =
+      (settings.getString('exhalePauseSound') ?? 'exhalePause.mp3');
   circleImage = (settings.getString('circleImage') ?? 'assets/circle.jpg');
   breathingTechnique = (settings.getInt('breathingTechnique') ?? 3);
   increasing = (settings.getBool('increasing') ?? false);
@@ -59,9 +62,11 @@ Future<void> save() async {
   await settings.setInt('customExhalePause', customExhalePause);
   await settings.setString('endSound', endSound);
   await settings.setString('startSound', startSound);
-  await settings.setString('pauseSound', pauseSound);
+
   await settings.setString('inhaleSound', inhaleSound);
   await settings.setString('exhaleSound', exhaleSound);
+  await settings.setString('inhalePauseSound', inhalePauseSound);
+  await settings.setString('exhalePauseSound', exhalePauseSound);
   await settings.setString('cirlceImage', circleImage);
   await settings.setInt('breathingTechnique', breathingTechnique);
   await settings.setBool('increasing', increasing);
