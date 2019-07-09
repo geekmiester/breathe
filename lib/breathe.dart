@@ -133,12 +133,12 @@ class _Breathe extends State<BreatheState> {
             child: GestureDetector(
               onPanDown: (context) {
                 if (run) {
-                  resetCircle();
                   hapticFeedback('stop');
+                  resetCircle();
                 } else {
+                  hapticFeedback('start');
                   breathe();
                   introImage = emptyImage;
-                  hapticFeedback('start');
                 }
               },
               child: AspectRatio(
