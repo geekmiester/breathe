@@ -1,3 +1,4 @@
+import 'package:breathe/techniques.dart';
 import 'package:flutter/material.dart';
 
 String name = '';
@@ -41,10 +42,11 @@ int breathingTechnique = 3;
 
 int starts = 0;
 int duration = 3;
-int inhaleTime = 5;
-int inhalePause = 0;
-int exhaleTime = 5;
-int exhalePause = 0;
+
+int inhaleTime = techniques[breathingTechnique]['inhaleTime'];
+int inhalePause = techniques[breathingTechnique]['inhalePause'];
+int exhaleTime = techniques[breathingTechnique]['exhaleTime'];
+int exhalePause = techniques[breathingTechnique]['exhalePause'];
 
 int customInhaleTime = 5;
 int customInhalePause = 0;

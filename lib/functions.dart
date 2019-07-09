@@ -13,14 +13,22 @@ Future<void> load() async {
   name = (settings.getString('name') ?? '');
   starts = (settings.getInt('starts') ?? 0);
   duration = (settings.getInt('duration') ?? 3);
-  inhaleTime = (settings.getInt('inhaleTime') ?? 5);
-  inhalePause = (settings.getInt('inhalePause') ?? 0);
-  exhaleTime = (settings.getInt('exhaleTime') ?? 5);
-  exhalePause = (settings.getInt('exhalePause') ?? 0);
-  customInhaleTime = (settings.getInt('customInhaleTime') ?? 5);
-  customInhalePause = (settings.getInt('customInhalePause') ?? 0);
-  customExhaleTime = (settings.getInt('customExhaleTime') ?? 5);
-  customExhalePause = (settings.getInt('customExhalePause') ?? 0);
+  inhaleTime = (settings.getInt('inhaleTime') ??
+      techniques[breathingTechnique]['inhaleTime']);
+  inhalePause = (settings.getInt('inhalePause') ??
+      techniques[breathingTechnique]['inhalePause']);
+  exhaleTime = (settings.getInt('exhaleTime') ??
+      techniques[breathingTechnique]['exhaleTime']);
+  exhalePause = (settings.getInt('exhalePause') ??
+      techniques[breathingTechnique]['exhalePause']);
+  customInhaleTime = (settings.getInt('customInhaleTime') ??
+      techniques[breathingTechnique]['inhaleTime']);
+  customInhalePause = (settings.getInt('customInhalePause') ??
+      techniques[breathingTechnique]['inhalePause']);
+  customExhaleTime = (settings.getInt('customExhaleTime') ??
+      techniques[breathingTechnique]['exhaleTime']);
+  customExhalePause = (settings.getInt('customExhalePause') ??
+      techniques[breathingTechnique]['exhalePause']);
   endSound = (settings.getString('endSound') ?? 'end.mp3');
   startSound = (settings.getString('startSound') ?? 'start.mp3');
   inhaleSound = (settings.getString('inhaleSound') ?? 'inhale.mp3');
@@ -30,7 +38,8 @@ Future<void> load() async {
   exhalePauseSound =
       (settings.getString('exhalePauseSound') ?? 'exhalePause.mp3');
   circleImage = (settings.getString('circleImage') ?? 'assets/circle.jpg');
-  breathingTechnique = (settings.getInt('breathingTechnique') ?? 3);
+  breathingTechnique =
+      (settings.getInt('breathingTechnique') ?? breathingTechnique);
   increasing = (settings.getBool('increasing') ?? false);
   notificationEnabled = (settings.getBool('notificationEnabled') ?? false);
   time = DateTime(
