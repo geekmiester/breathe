@@ -86,7 +86,7 @@ class _Breathe extends State<BreatheState> {
                   (inhaleTime + inhalePause + exhaleTime + exhalePause)) {
             breathCount = 0;
             sound(endSound);
-            hapticFeedback('end');
+            hapticFeedback(hapticFeedbackType.end);
             run = false;
           }
 
@@ -133,10 +133,10 @@ class _Breathe extends State<BreatheState> {
             child: GestureDetector(
               onPanDown: (context) {
                 if (run) {
-                  hapticFeedback('stop');
+                  hapticFeedback(hapticFeedbackType.stop);
                   resetCircle();
                 } else {
-                  hapticFeedback('start');
+                  hapticFeedback(hapticFeedbackType.start);
                   breathe();
                   introImage = emptyImage;
                 }

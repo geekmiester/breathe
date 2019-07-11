@@ -144,19 +144,23 @@ void resetCircle() {
   circleSize = 0.1;
 }
 
-void hapticFeedback(String feedback) {
+enum hapticFeedbackType { tap, start, stop, end }
+
+void hapticFeedback(hapticFeedbackType feedback) {
   // https://pub.dev/packages/vibrate
   // https://developer.apple.com/design/human-interface-guidelines/ios/user-interaction/haptics/
-  if (feedback == 'tap') {
-    Vibrate.feedback(FeedbackType.light);
-  }
-  if (feedback == 'start') {
-    Vibrate.feedback(FeedbackType.success);
-  }
-  if (feedback == 'stop') {
-    Vibrate.feedback(FeedbackType.warning);
-  }
-  if (feedback == 'end') {
-    Vibrate.feedback(FeedbackType.error);
+  switch (feedback) {
+    case hapticFeedbackType.tap:
+      Vibrate.feedback(FeedbackType.light);
+      break;
+    case hapticFeedbackType.start:
+      Vibrate.feedback(FeedbackType.success);
+      break;
+    case hapticFeedbackType.stop:
+      Vibrate.feedback(FeedbackType.warning);
+      break;
+    case hapticFeedbackType.end:
+      Vibrate.feedback(FeedbackType.error);
+      break;
   }
 }
