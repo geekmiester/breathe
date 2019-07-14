@@ -114,7 +114,7 @@ class _Settings extends State<SettingsState> {
         child: Column(
           children: <Widget>[
             for (int index = 0; index < techniques.length; index++)
-              MaterialButton(
+              FlatButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25)),
                 onPressed: () {
@@ -167,7 +167,7 @@ class _Settings extends State<SettingsState> {
                     fontSize: fontSize,
                     fontWeight: fontWeight,
                     color: textColor)),
-            MaterialButton(
+            FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(25)),
               onPressed: () {
@@ -346,7 +346,7 @@ class _Settings extends State<SettingsState> {
                 ),
               ),
               child: new Builder(
-                builder: (context) => MaterialButton(
+                builder: (context) => FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25)),
                   child: Text(
